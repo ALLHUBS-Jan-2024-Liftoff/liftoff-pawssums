@@ -13,7 +13,7 @@ export const RegistrationForm = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log("done!");
+        console.log("it,s working!");
     }
 
     return(
