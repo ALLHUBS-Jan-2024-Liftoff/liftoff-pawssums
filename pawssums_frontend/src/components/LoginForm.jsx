@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 
-export const RegistrationForm = () => {
+export const LoginForm = () => {
     const [values, setValues] = useState({
-        name:'',
         email:'',
         password:''
     })
@@ -20,10 +19,6 @@ export const RegistrationForm = () => {
         <div>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label htmlFor="name">Name</label>
-                    <input type="text" id="name" name="name" placeholder="Enter name" onChange={handleInput}  ></input>
-                </div>
-                <div>
                     <label htmlFor="email">E-mail</label>
                     <input type="email" id="email" name="email" placeholder="Enter e-mail" onChange={handleInput} ></input>
                 </div>
@@ -31,9 +26,9 @@ export const RegistrationForm = () => {
                     <label htmlFor="password">Password</label>
                     <input type="password" id="password" name="password" placeholder="Enter password" onChange={handleInput}  ></input>
                 </div>
-                <button type="submit">Register</button>
-                <p>Already have an account?</p>
-                <button>Log in</button>
+                <button type="submit">Sign in</button>
+                <p>Don't have an account?</p>
+                <button>Register</button>
             </form>
             
         </div>
