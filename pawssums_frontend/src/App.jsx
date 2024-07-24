@@ -1,16 +1,24 @@
-import { useState } from 'react'
 import './App.css'
-import { RegistrationForm } from "./components/RegistrationForm";
-import { LoginForm } from "./components/LoginForm";
+import { EncounterList } from './components/pages/EncounterList';
+import { Home } from './components/pages/Home';
+import { Login } from './components/pages/Login';
+import { Profile } from './components/pages/Profile';
+import { Register } from './components/pages/Register';
+import { RegisterEncounter } from './components/pages/RegisterEncounter';
+import { Search } from './components/pages/Search';
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
       <h1>WILD ENCOUNTERS</h1>
-      <RegistrationForm/>
-      <LoginForm/>
+      <Home/>
+      <Login/>
+      <Register/>
+      <Profile/>
+      <RegisterEncounter/>
+      <EncounterList/>
+      <Search/>
     </>
   )
 }
