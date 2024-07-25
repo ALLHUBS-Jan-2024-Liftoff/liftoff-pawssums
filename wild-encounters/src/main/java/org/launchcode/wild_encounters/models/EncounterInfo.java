@@ -10,4 +10,5 @@ public class EncounterInfo {
     @GeneratedValue
     private Long id;
 
+
 }
