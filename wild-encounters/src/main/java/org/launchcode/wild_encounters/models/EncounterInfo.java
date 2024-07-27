@@ -9,6 +9,12 @@ public class EncounterInfo {
     @Id
     @GeneratedValue
     private Long id;
+    private String animal;
+    private String description;
+
+    public Encounter(){
+
+    }
 
 
 }
