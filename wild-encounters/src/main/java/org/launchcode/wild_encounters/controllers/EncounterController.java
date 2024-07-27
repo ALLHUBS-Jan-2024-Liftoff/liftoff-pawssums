@@ -2,6 +2,7 @@ package org.launchcode.wild_encounters.controllers;
 
 import org.launchcode.wild_encounters.data.EncounterRepository;
 import org.launchcode.wild_encounters.data.UserRepository;
+import org.launchcode.wild_encounters.models.Encounter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,10 +36,16 @@ public class EncounterController {
         return "redirect:/encounters";
     }
 
-    @GetMapping("delete/{id}")
+    @PostMapping("delete/{id}")
     public String deleteEncounter(@PathVariable("id") Long id){
         encounterRepository.deleteById(id);
         return "redirect:/encounters";
+    }
+
+    @GetMapping("edit/{id}")
+    public String editEncounter(@PathVariable("id") Long id, Model model){
+        model.addAttribute("encounter", encounterRepository.findById(id));
+        return "encounter/add";
     }
 
 }
