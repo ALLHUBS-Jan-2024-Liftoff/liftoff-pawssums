@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -22,5 +24,17 @@ public class EncounterController {
         model.addAttribute("encounters", encounterRepository.findAll());
         return "encounter/list";
 
+    }
+
+    @GetMapping("/add")
+    public String showNewEncounterForm (Model model){
+        model.addAttribute("encounter", new Encounter());
+        return "encounter/form";
+    }
+
+    @PostMapping
+    public  String saveNewEncounter(@ModelAttribute("encounter") Encounter encounter) {
+        encounterRepository.save(encounter);
+        return "redirect:/encounters"
     }
 }
