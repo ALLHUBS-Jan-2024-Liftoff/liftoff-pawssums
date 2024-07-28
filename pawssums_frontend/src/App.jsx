@@ -21,7 +21,17 @@ function App() {
     <>
     <APIProvider apiKey="AIzaSyBB-kFmMyRJ7xPlGzMxPHfYVvtzSTUDDsg">
       <div style = {{height: "60vh", width: "100vh"}}>
-          <Map zoom={9} center={positionSTL}></Map>
+          <Map zoom={9}
+               center={positionSTL}
+               mapId="7c334410935a7458">
+          <AdvancedMarker position={positionSTL}>
+              <Pin
+                background={"green"}
+                borderColor={"orange"}
+                glyphColor={"orange"}
+                />
+              </AdvancedMarker>
+          </Map>
       </div>
     </APIProvider>
 
