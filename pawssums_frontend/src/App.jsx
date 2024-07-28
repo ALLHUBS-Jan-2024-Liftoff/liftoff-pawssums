@@ -17,6 +17,8 @@ import {
 
 function App() {
   const positionSTL = {lat: 38.62 ,lng:-90.19};
+  const [open, setOpen] = useState(false);
+
   return (
     <>
     <APIProvider apiKey="AIzaSyBB-kFmMyRJ7xPlGzMxPHfYVvtzSTUDDsg">
@@ -24,7 +26,7 @@ function App() {
           <Map zoom={9}
                center={positionSTL}
                mapId="7c334410935a7458">
-          <AdvancedMarker position={positionSTL}>
+          <AdvancedMarker position={positionSTL} onClick={() => setOpen(true)}>
               <Pin
                 background={"green"}
                 borderColor={"orange"}
@@ -32,6 +34,10 @@ function App() {
                 />
               </AdvancedMarker>
           </Map>
+          {open && <InfoWindow position={positionSTL} onCloseClick={() => setOpen(false)}>
+              <h1>Animal Sighted!</h1>
+          </InfoWindow>}
+
       </div>
     </APIProvider>
 
