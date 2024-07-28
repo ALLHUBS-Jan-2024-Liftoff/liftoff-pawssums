@@ -23,8 +23,8 @@ function App() {
     <>
     <APIProvider apiKey="AIzaSyBB-kFmMyRJ7xPlGzMxPHfYVvtzSTUDDsg">
       <div style = {{height: "60vh", width: "100vh"}}>
-          <Map zoom={9}
-               center={positionSTL}
+          <Map defaultZoom={9}
+               defaultCenter={positionSTL}
                mapId="7c334410935a7458">
           <AdvancedMarker position={positionSTL} onClick={() => setOpen(true)}>
               <Pin
