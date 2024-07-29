@@ -3,7 +3,7 @@
 export const Home = () => {
 
     return(
-        <div class="d-grid justify-content-center p-5">
+        <div className="d-grid justify-content-center p-5">
             <div className="bg-light p-3 border rounded m-5">
                 <h1 className="text-center p-2">WILD ENCOUNTERS</h1>
             </div>
