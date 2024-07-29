@@ -8,6 +8,7 @@ import { Register } from './components/pages/Register';
 import { RegisterEncounter } from './components/pages/RegisterEncounter';
 import { Search } from './components/pages/Search';
 import { useState } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import {
     APIProvider,
     Map,
