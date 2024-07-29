@@ -18,6 +18,7 @@ export const LoginForm = () => {
     return(
         <div className="d-flex justify-content-center align-items-center vh-100">
             <div className="bg-light p-3 border rounded w-25">
+                <h2>Login</h2>
                 <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label class="form-label" htmlFor="email">E-mail</label>
@@ -27,7 +28,7 @@ export const LoginForm = () => {
                     <label class="form-label" htmlFor="password">Password</label>
                     <input class="form-control" type="password" id="password" name="password" placeholder="Enter password" onChange={handleInput}  ></input>
                 </div>
-                <button className="btn btn-success border w-100" type="submit">Sign in</button>
+                <button className="btn btn-success border w-100" type="submit">Log in</button>
                 <button className="btn btn-link w-100">Don't have an account? Register</button>
             </form>
             </div>
