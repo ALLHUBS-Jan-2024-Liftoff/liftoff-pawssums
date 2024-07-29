@@ -26,7 +26,6 @@ function App() {
       </div>
     </APIProvider>
 
-      <h1>WILD ENCOUNTERS</h1>
       <Home/>
       <Login/>
       <Register/>
