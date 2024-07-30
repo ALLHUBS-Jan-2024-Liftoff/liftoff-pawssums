@@ -1,28 +1,31 @@
-
-
 export const Navbar = () => {
     return (
-        <nav className="navbar nav-expand-sm navbar-light bg-light">
-            <a className="navbar-brand mb-0 h1" href="#">
-                <img className="d-inline-block align-top" src="" />
+        <nav className="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
+            <a className="navbar-brand mb-0 mt-0 m-3 h1 border" href="#">
                 Wild Encounters
             </a>
-            <div className="collapse navbar-collapse" id="navbarNav">
-                <ul className="navbar-nav">
-                    <li className="nav-item active">
-                        <a className="nav-link active" href="#">Home</a>
-                    </li>
-                    <li className="nav-item active">
-                        <a className="nav-link" href="#">Login</a>
-                    </li>
-                    <li className="nav-item active">
-                        <a className="nav-link" href="#">Register</a>
-                    </li>
-                    <li className="nav-item active">
-                        <a className="nav-link" href="#">Search</a>
-                    </li>
-                </ul>
-            </div>
+            <ul className="navbar-nav mb-0 mt-0 m-3">
+                <li className="nav-item">
+                    <a className="nav-link" href="#">
+                        Home
+                    </a>
+                </li>
+                <li className="nav-item">
+                    <a className="nav-link" href="#">
+                        Login
+                    </a>
+                </li>
+                <li className="nav-item">
+                    <a className="nav-link" href="#">
+                        Register
+                    </a>
+                </li>
+                <li className="nav-item">
+                    <a className="nav-link" href="#">
+                        Search
+                    </a>
+                </li>
+            </ul>
         </nav>
     );
 };
