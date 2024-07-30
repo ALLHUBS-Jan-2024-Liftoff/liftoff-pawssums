@@ -68,6 +68,7 @@ export const RegisterEncounter = () => {
         </label>
         <button onClick={handleDescriptionClick}>Submit Description</button>
       </div>
+      <button onClick={() => submitData(animal, description)}>Submit Encounter</button>
     </div>
   );
 };
