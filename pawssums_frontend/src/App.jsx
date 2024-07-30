@@ -9,6 +9,7 @@ import { RegisterEncounter } from './components/pages/RegisterEncounter';
 import { Search } from './components/pages/Search';
 import { useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import {
     APIProvider,
     Map,
@@ -41,6 +42,7 @@ function App() {
     }
 
   return (
+  <Router>
     <>
     <APIProvider apiKey="AIzaSyBB-kFmMyRJ7xPlGzMxPHfYVvtzSTUDDsg">
       <div style = {{height: "60vh", width: "100vh"}}>
@@ -62,15 +64,19 @@ function App() {
       </div>
     </APIProvider>
 
-      <Home/>
-      <Login/>
-      <Register/>
-      <Profile/>
-      <RegisterEncounter/>
-      <EncounterList/>
-      <Search/>
+    <Routes>
+              <Route path="/home" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/register-encounter" element={<RegisterEncounter />} />
+              <Route path="/encounter-list" element={<EncounterList />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/" element={<Home />} />
+            </Routes>
     </>
-  )
+    </Router>
+  );
 }
 
 export default App
