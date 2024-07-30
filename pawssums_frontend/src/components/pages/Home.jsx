@@ -19,6 +19,9 @@ export const Home = () => {
           <Button color="link">
             <Link to="/register-encounter">Add New Animal Encounter</Link>
             </Button>
+            <Button color="link">
+                        <Link to="/login">Existing User? Click Here to Login </Link>
+                        </Button>
         </div>
       </Container>
     </>
