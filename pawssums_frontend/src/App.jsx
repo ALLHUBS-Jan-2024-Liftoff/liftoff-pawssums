@@ -15,7 +15,6 @@ import {
     AdvancedMarker,
     Pin,
     InfoWindow,} from "@vis.gl/react-google-maps";
-import { Navbar } from './components/Navbar';
 
 function App() {
   const positionSTL = {lat: 38.62 ,lng:-90.19};
@@ -27,7 +26,6 @@ function App() {
       </div>
     </APIProvider>
 
-      <Navbar/>
       <Home/>
       <Login/>
       <Register/>
