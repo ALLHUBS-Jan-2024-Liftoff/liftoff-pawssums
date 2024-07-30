@@ -7,7 +7,7 @@ import { Profile } from './components/pages/Profile';
 import { Register } from './components/pages/Register';
 import { RegisterEncounter } from './components/pages/RegisterEncounter';
 import { Search } from './components/pages/Search';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
     APIProvider,
@@ -19,6 +19,26 @@ import {
 function App() {
   const positionSTL = {lat: 38.62 ,lng:-90.19};
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+      setLoading(true);
+
+      fetch('wild')
+        .then(response => response.json())
+        .then(data => {
+          setGroups(data);
+          setLoading(false);
+        })
+        .catch(error => {
+          console.error('Error fetching the encounters:', error);
+          setLoading(false);
+        });
+    }, []);
+
+    if (loading) {
+      return <p>Loading...</p>;
+    }
 
   return (
     <>
