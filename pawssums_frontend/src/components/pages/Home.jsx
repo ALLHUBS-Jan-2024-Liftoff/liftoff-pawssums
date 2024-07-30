@@ -14,7 +14,7 @@ export const Home = () => {
             <h1 className="text-center border">MAP</h1>
           </div>
           <Button color="link">
-            <Link to="/Register">Register Encounter</Link>
+            <Link to="/Register">Register New User</Link>
           </Button>
         </div>
       </Container>
