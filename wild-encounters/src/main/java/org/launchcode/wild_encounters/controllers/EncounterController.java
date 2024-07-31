@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("encounter")
+@RestController
+@RequestMapping("/api")
 public class EncounterController {
 
     @Autowired
@@ -17,7 +17,7 @@ public class EncounterController {
 //    @Autowired
 //    private UserRepository userRepository;
 
-    @GetMapping
+    @GetMapping("/encounters")
     public String getAllEncounters(Model model) {
         model.addAttribute("encounters", encounterRepository.findAll());
         return "encounter/list";
