@@ -2,7 +2,7 @@ import axios from "axios";
 
 const BASEAPIURL = "http://localhost:8080";
 
-export const fetchTodos = async () => {
+export const fetchEncounters = async () => {
   try {
     const response = await axios.get(`${BASEAPIURL}/api/encounters`);
     return response.data;

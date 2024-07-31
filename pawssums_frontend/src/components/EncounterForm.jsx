@@ -5,25 +5,13 @@ export const EncounterForm = ({ addNewEncounter }) => {
   const [description, setDescription] = useState('');
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const newEncounter = { animal, description };
-
-    fetch('http://localhost:8080/api/encounters', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newEncounter)
-    })
-    .then(response => response.json())
-    .then(data => {
-      setAnimal('');
-      setDescription('');
-      onNewEncounter(); // Refresh the encounter list
-    })
-    .catch(error => console.error('Error adding encounter:', error));
-  };
+      e.preventDefault();
+      if (animal !== "" && description !== "") {
+        addNewEncounter(animal, description);
+        setAnimal("");
+        setDescription("");
+      }
+    };
 
   return (
     <form onSubmit={handleSubmit}>
