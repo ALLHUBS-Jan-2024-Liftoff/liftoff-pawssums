@@ -19,23 +19,31 @@ public class EncounterController {
 //    private UserRepository userRepository;
 
     @GetMapping("/encounters")
-    public String getAllEncounters(Model model) {
-        model.addAttribute("encounters", encounterRepository.findAll());
-        return "encounter/list";
+    public Iterable<Encounter> getAllEncounters() {
+        return encounterRepository.findAll();
+    }
+//    public String getAllEncounters(Model model) {
+//        model.addAttribute("encounters", encounterRepository.findAll());
+//        return "encounter/list";
+//
+//    }
 
+
+//    @GetMapping("add")
+//    public String showNewEncounterForm (Model model){
+//        model.addAttribute("encounter", new Encounter());
+//        return "encounter/add";
+//    }
+
+    @PostMapping("/encounters/add")
+    public Encounter saveNewEncounter(@RequestBody Encounter encounter){
+        return encounterRepository.save(encounter);
     }
 
-    @GetMapping("add")
-    public String showNewEncounterForm (Model model){
-        model.addAttribute("encounter", new Encounter());
-        return "encounter/add";
-    }
-
-    @PostMapping("add")
-    public  String saveNewEncounter(@ModelAttribute("encounter") Encounter encounter) {
-        encounterRepository.save(encounter);
-        return "redirect:/encounters";
-    }
+//    public  String saveNewEncounter(@ModelAttribute("encounter") Encounter encounter) {
+//        encounterRepository.save(encounter);
+//        return "redirect:/encounters";
+//    }
 
     @PostMapping("delete/{id}")
     public String deleteEncounter(@PathVariable("id") Long id){

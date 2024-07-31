@@ -23,7 +23,7 @@ export const Home = () => {
                         <Link to="/login">Existing User? Click Here to Login </Link>
                         </Button>
             <Button color="link">
-                        <Link to="/EncounterList">See All Encounters</Link>
+                        <Link to="/encounter-list">See All Encounters</Link>
                          </Button>
         </div>
       </Container>

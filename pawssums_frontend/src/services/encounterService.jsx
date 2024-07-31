@@ -12,7 +12,7 @@ export const fetchEncounters = async () => {
         }
        };
 
-   export const addEncounter = async (animal, description) => {
+   export const addNewEncounter = async (animal, description) => {
      try {
        const response = await axios.post(`${BASEAPIURL}/api/encounters/add`, null, {
          params: { animal, description },

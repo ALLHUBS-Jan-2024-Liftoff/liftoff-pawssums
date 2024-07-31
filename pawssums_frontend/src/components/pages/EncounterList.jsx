@@ -27,15 +27,17 @@ const [encounters, setEncounters] = useState([]);
 
     return(
         <div>
-            <h1>EncounterList</h1>
-          <ul>
-            {encounters.map(encounter => (
-              <li key={encounter.id}>
-                {encounter.animal} - {encounter.description}
-              </li>
-            ))}
-          </ul>
+            <h1>Encounter List</h1>
+            <table className="table table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Animal</th>
+                        <th scope="col">Description</th>
+                      </tr>
+                    </thead>
+                  </table>
         </div>
     );
-}
+};
 
