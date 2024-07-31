@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export const EncounterForm = ({ onNewEncounter }) => {
+export const EncounterForm = ({ addNewEncounter }) => {
   const [animal, setAnimal] = useState('');
   const [description, setDescription] = useState('');
 
