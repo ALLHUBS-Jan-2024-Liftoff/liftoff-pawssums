@@ -6,7 +6,6 @@ export const EncounterList = () => {
 const [showEncounterForm, setShowEncounterForm] = useState(false);
 const [encounters, setEncounters] = useState([]);
 
-
   useEffect(() => {
       fetchEncounters()
         .then(setEncounters)
