@@ -3,7 +3,7 @@ import {EncounterForm} from '../EncounterForm';
 import {fetchEncounters, addNewEncounter} from "../../services/encounterService";
 
 export const EncounterList = () => {
-const [showEncounterForm, setShowEncounterForm] = useState(false);
+//  const [showEncounterForm, setShowEncounterForm] = useState(false);
 const [encounters, setEncounters] = useState([]);
 
 
@@ -17,8 +17,8 @@ const [encounters, setEncounters] = useState([]);
 
      const handleAddEncounter = (animal, description) => {
         addNewEncounter(animal, description)
-          .then((addNewEncounter) => {
-            setEncounters([...encounters, addNewEncounter]);
+          .then((newEncounter) => {
+            setEncounters([...encounters, newEncounter]);
           })
           .catch(error => {
             console.error("There was an error adding the encounter", error);

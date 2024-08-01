@@ -1,10 +1,10 @@
-import axios from "axios";
+import axios from 'axios';
 
-const BASEAPIURL = "http://localhost:8080";
+const BASEAPIURL = "http://localhost:8080/api/encounters";
 
 export const fetchEncounters = async () => {
   try {
-    const response = await axios.get(`${BASEAPIURL}/api/encounters`);
+    const response = await axios.get(`${BASEAPIURL}`);
     return response.data;
       } catch (error) {
         console.error("Error: not able to fetch encounters", error);
@@ -14,15 +14,14 @@ export const fetchEncounters = async () => {
 
    export const addNewEncounter = async (animal, description) => {
      try {
-       const response = await axios.post(`${BASEAPIURL}/api/encounters/add`, null, {
-         params: { animal, description },
-       });
+       const response = await axios.post(`${BASEAPIURL}/add`, {animal, description});
        return response.data;
      } catch (error) {
        console.error("Error: not able to add encounter", error);
        throw error;
      }
    };
+
 
 //    export const deleteEncounter = async (encounterId) => {
 //      try {

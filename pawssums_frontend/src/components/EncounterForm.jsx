@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
+import { addNewEncounter } from '../services/encounterService';
 
-export const EncounterForm = ({ addNewEncounter }) => {
+export const EncounterForm = () => {
   const [animal, setAnimal] = useState('');
   const [description, setDescription] = useState('');
 
+
   const handleSubmit = (e) => {
       e.preventDefault();
-      if (animal !== "" && description !== "") {
+      if (animal !== '' && description !== '') {
         addNewEncounter(animal, description);
-        setAnimal("");
-        setDescription("");
+        setAnimal('');
+        setDescription('');
       }
     };
 
@@ -21,6 +23,7 @@ export const EncounterForm = ({ addNewEncounter }) => {
           type="text"
           value={animal}
           onChange={(e) => setAnimal(e.target.value)}
+          required
         />
       </div>
       <div>
@@ -35,6 +38,8 @@ export const EncounterForm = ({ addNewEncounter }) => {
     </form>
   );
 };
+
+
 
 //   return (
 //     <div>
