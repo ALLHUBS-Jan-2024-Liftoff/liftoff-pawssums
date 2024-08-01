@@ -14,7 +14,9 @@ export const fetchEncounters = async () => {
 
    export const addNewEncounter = async (animal, description) => {
      try {
-       const response = await axios.post(`${BASEAPIURL}/add`, {animal, description});
+       const response = await axios.post(`${BASEAPIURL}/add`, null, {
+       params: {animal, description}
+       });
        return response.data;
      } catch (error) {
        console.error("Error: not able to add encounter", error);
