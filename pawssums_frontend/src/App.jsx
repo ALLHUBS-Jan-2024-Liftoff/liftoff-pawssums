@@ -7,8 +7,9 @@ import { Profile } from './components/pages/Profile';
 import { Register } from './components/pages/Register';
 import { RegisterEncounter } from './components/pages/RegisterEncounter';
 import { Search } from './components/pages/Search';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import {
     APIProvider,
     Map,
@@ -19,8 +20,10 @@ import {
 function App() {
   const positionSTL = {lat: 38.62 ,lng:-90.19};
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   return (
+  <Router>
     <>
     <APIProvider apiKey="AIzaSyBB-kFmMyRJ7xPlGzMxPHfYVvtzSTUDDsg">
       <div style = {{height: "60vh", width: "100vh"}}>
@@ -42,15 +45,19 @@ function App() {
       </div>
     </APIProvider>
 
-      <Home/>
-      <Login/>
-      <Register/>
-      <Profile/>
-      <RegisterEncounter/>
-      <EncounterList/>
-      <Search/>
+    <Routes>
+              <Route path="/home" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/register-encounter" element={<RegisterEncounter />} />
+              <Route path="/encounter-list" element={<EncounterList />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/" element={<Home />} />
+            </Routes>
     </>
-  )
+    </Router>
+  );
 }
 
 export default App

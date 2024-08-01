@@ -1,39 +1,31 @@
 package org.launchcode.wild_encounters.controllers;
 
 import org.launchcode.wild_encounters.data.EncounterRepository;
-import org.launchcode.wild_encounters.data.UserRepository;
 import org.launchcode.wild_encounters.models.Encounter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("encounter")
+@RestController
+@RequestMapping("/api/encounters")
+@CrossOrigin(origins = "http://localhost:5173")
 public class EncounterController {
 
     @Autowired
     private EncounterRepository encounterRepository;
-//    @Autowired
-//    private UserRepository userRepository;
+
 
     @GetMapping
-    public String getAllEncounters(Model model) {
-        model.addAttribute("encounters", encounterRepository.findAll());
-        return "encounter/list";
-
+    public Iterable<Encounter> getAllEncounters() {
+        return encounterRepository.findAll();
     }
 
-    @GetMapping("add")
-    public String showNewEncounterForm (Model model){
-        model.addAttribute("encounter", new Encounter());
-        return "encounter/add";
-    }
-
-    @PostMapping("add")
-    public  String saveNewEncounter(@ModelAttribute("encounter") Encounter encounter) {
-        encounterRepository.save(encounter);
-        return "redirect:/encounters";
+    @PostMapping("/add")
+    public Encounter addNewEncounter(@RequestParam String animal, @RequestParam String description){
+        Encounter newEncounter = new Encounter();
+        newEncounter.setAnimal(animal);
+        newEncounter.setDescription(description);
+        return encounterRepository.save(newEncounter);
     }
 
     @PostMapping("delete/{id}")

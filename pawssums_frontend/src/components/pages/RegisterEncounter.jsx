@@ -1,11 +1,13 @@
-
+import {EncounterForm} from '../EncounterForm'
 
 export const RegisterEncounter = () => {
 
     return(
         <div>
-            <h1>Register Encounter</h1>
-            
+            <h1>Add Encounter</h1>
+            <EncounterForm/>
         </div>
     )
 }
+
+
