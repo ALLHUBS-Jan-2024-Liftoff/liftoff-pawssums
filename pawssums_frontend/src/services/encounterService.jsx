@@ -24,7 +24,7 @@ export const fetchEncounters = async () => {
      }
    };
 
-
+//Code to delete encouter
 //    export const deleteEncounter = async (encounterId) => {
 //      try {
 //        await axios.post(`${BASEAPIURL}/api/encounters/delete`, null, {
