@@ -27,10 +27,7 @@ public class EncounterController {
         newEncounter.setDescription(description);
         return encounterRepository.save(newEncounter);
     }
-//    public  String saveNewEncounter(@ModelAttribute("encounter") Encounter encounter) {
-//        encounterRepository.save(encounter);
-//        return "redirect:/encounters";
-//    }
+
     @PostMapping("delete/{id}")
     public String deleteEncounter(@PathVariable("id") Long id){
         encounterRepository.deleteById(id);
