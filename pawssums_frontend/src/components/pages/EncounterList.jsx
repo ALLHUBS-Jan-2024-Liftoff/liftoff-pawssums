@@ -3,7 +3,7 @@ import {EncounterForm} from '../EncounterForm';
 import {fetchEncounters, addNewEncounter} from "../../services/encounterService";
 
 export const EncounterList = () => {
-//  const [showEncounterForm, setShowEncounterForm] = useState(false);
+const [showEncounterForm, setShowEncounterForm] = useState(false);
 const [encounters, setEncounters] = useState([]);
 
 
@@ -31,12 +31,19 @@ const [encounters, setEncounters] = useState([]);
             <table className="table table-hover">
                     <thead>
                       <tr>
-                        <th scope="col">#</th>
                         <th scope="col">Animal</th>
                         <th scope="col">Description</th>
                       </tr>
                     </thead>
-                  </table>
+                    <tbody>
+                       {encounters.map((encounter) => (
+                       <tr key={encounter.id}>
+                       <td>{encounter.animal}</td>
+                       <td>{encounter.description}</td>
+                       </tr>
+                       ))}
+                    </tbody>
+              </table>
         </div>
     );
 };
