@@ -35,7 +35,7 @@ const [encounters, setEncounters] = useState([]);
                       </tr>
                     </thead>
                     <tbody>
-                       {encounters.map((encounter) => (
+                       {encounters.map((encounter, index) => (
                        <tr key={encounter.id}>
                        <td>{encounter.animal}</td>
                        <td>{encounter.description}</td>
