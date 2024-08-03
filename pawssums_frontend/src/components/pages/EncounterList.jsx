@@ -3,6 +3,8 @@ import { EncounterForm } from "../EncounterForm";
 import {
   fetchEncounters,
   addNewEncounter,
+  editEncounter,
+  deleteEncounter
 } from "../../services/encounterService";
 import {Navbar} from '../Navbar'
 

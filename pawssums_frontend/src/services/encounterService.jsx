@@ -25,13 +25,24 @@ export const fetchEncounters = async () => {
    };
 
 //Code to delete encouter
-//    export const deleteEncounter = async (encounterId) => {
-//      try {
-//        await axios.post(`${BASEAPIURL}/api/encounters/delete`, null, {
-//          params: { encounterId },
-//        });
-//      } catch (error) {
-//        console.error("Error: not able to delete encounter!", error);
-//        throw error;
-//      }
-//    };
+   export const deleteEncounter = async (encounterId) => {
+     try {
+       await axios.post(`${BASEAPIURL}/delete`, null, {
+         params: { encounterId },
+       });
+     } catch (error) {
+       console.error("Error: not able to delete encounter!", error);
+       throw error;
+     }
+   };
+
+   export const editEncounter = async (encounterId) => {
+        try {
+          await axios.post(`${BASEAPIURL}/edit`, null, {
+            params: { encounterId },
+          });
+        } catch (error) {
+          console.error("Error: not able to edit encounter!", error);
+          throw error;
+        }
+      };
