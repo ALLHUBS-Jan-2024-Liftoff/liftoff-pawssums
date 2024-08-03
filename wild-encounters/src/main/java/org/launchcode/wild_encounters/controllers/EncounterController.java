@@ -28,16 +28,25 @@ public class EncounterController {
         return encounterRepository.save(newEncounter);
     }
 
-    @PostMapping("delete/{id}")
-    public String deleteEncounter(@PathVariable("id") Long id){
-        encounterRepository.deleteById(id);
-        return "redirect:/encounters";
+    @PostMapping("/delete")
+    public void deleteEncounter(@RequestParam Long encounterId){
+        encounterRepository.deleteById((encounterId));
+
+
+//    public String deleteEncounter(@PathVariable("id") Long id){
+//        encounterRepository.deleteById(id);
+//        return "redirect:/encounters";
     }
 
-    @GetMapping("edit/{id}")
-    public String editEncounter(@PathVariable("id") Long id, Model model){
-        model.addAttribute("encounter", encounterRepository.findById(id));
-        return "encounter/add";
+    @PutMapping("/edit")
+    public Encounter editEncounter(@RequestParam Long encounterId, @RequestParam String animal, @RequestParam String description) {
+        Encounter encounter = new Encounter();
+        encounter.setAnimal(animal);
+        encounter.setDescription(description);
+        return encounterRepository.save(encounter);
+    }
+//    public String editEncounter(@PathVariable("id") Long id, Model model){
+//        model.addAttribute("encounter", encounterRepository.findById(id));
+//        return "encounter/add";
     }
 
-}
