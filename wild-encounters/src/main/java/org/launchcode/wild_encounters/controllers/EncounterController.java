@@ -21,7 +21,7 @@ public class EncounterController {
     }
 
     @PostMapping("/add")
-    public Encounter addNewEncounter(@RequestParam String animal, @RequestParam String description){
+    public Encounter addNewEncounter(@RequestParam String animal, @RequestParam String description) {
         Encounter newEncounter = new Encounter();
         newEncounter.setAnimal(animal);
         newEncounter.setDescription(description);
@@ -29,7 +29,7 @@ public class EncounterController {
     }
 
     @PostMapping("/delete")
-    public void deleteEncounter(@RequestParam Long encounterId){
+    public void deleteEncounter(@RequestParam Long encounterId) {
         encounterRepository.deleteById((encounterId));
 
 
@@ -38,13 +38,12 @@ public class EncounterController {
 //        return "redirect:/encounters";
     }
 
-    @PutMapping("/edit")
-    public Encounter editEncounter(@RequestParam Long encounterId, @RequestParam String animal, @RequestParam String description) {
-        Encounter encounter = new Encounter();
-        encounter.setAnimal(animal);
-        encounter.setDescription(description);
-        return encounterRepository.save(encounter);
-    }
+//    @GetMapping("/edit")
+//    public String editEncounter(@PathVariable("id") Long id, Model model) {
+//        Encounter encounter = encounterRepository.getReferenceById(id);
+//        model.addAttribute("encounter", encounter);
+//        return null;
+//    }
 //    public String editEncounter(@PathVariable("id") Long id, Model model){
 //        model.addAttribute("encounter", encounterRepository.findById(id));
 //        return "encounter/add";

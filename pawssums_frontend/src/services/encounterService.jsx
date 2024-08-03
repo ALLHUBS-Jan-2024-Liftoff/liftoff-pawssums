@@ -36,7 +36,7 @@ export const fetchEncounters = async () => {
      }
    };
 
-   export const editEncounter = async (encounterId) => {
+   export const editEncounter = async (id, animal, description) => {
         try {
           await axios.post(`${BASEAPIURL}/edit`, null, {
             params: { encounterId },

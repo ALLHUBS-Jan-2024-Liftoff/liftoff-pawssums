@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface EncounterRepository extends CrudRepository<Encounter,Long> {
 
 
+
 //    Object findAllById(Long id);
 }
