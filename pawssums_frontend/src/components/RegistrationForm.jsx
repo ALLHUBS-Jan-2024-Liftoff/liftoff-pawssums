@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export const RegistrationForm = () => {
     const [values, setValues] = useState({
@@ -34,7 +35,7 @@ export const RegistrationForm = () => {
                         <input class="form-control" type="password" id="password" name="password" placeholder="Enter password" onChange={handleInput}  ></input>
                     </div>
                     <button className="btn btn-success border w-100" type="submit">Register</button>
-                    <button className="btn btn-link w-100">Already have an account? Log in</button>
+                    <Link to="/login" className="btn btn-link w-100">Already have an account? Log in</Link>
                 </form>
             </div>
         </div>
