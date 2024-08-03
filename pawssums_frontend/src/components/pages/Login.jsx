@@ -1,10 +1,11 @@
 import {LoginForm} from '../LoginForm'
+import {Navbar} from '../Navbar'
 
 export const Login = () => {
 
     return(
         <div>
-            <h1>Login</h1>
+            <Navbar/>
             <LoginForm/>
         </div>
     )
