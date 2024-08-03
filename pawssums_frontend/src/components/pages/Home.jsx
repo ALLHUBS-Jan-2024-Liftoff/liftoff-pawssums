@@ -1,10 +1,12 @@
 import React from 'react';
 import { Container, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import {Navbar} from '../Navbar'
 
 export const Home = () => {
   return (
     <>
+      <Navbar/>
       <Container fluid>
         <div className="d-grid justify-content-center p-5">
           <div className="bg-light p-3 border rounded m-5">

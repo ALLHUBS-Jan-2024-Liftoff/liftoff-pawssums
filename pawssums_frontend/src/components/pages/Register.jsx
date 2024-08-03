@@ -1,10 +1,11 @@
 import {RegistrationForm} from '../RegistrationForm'
+import {Navbar} from '../Navbar'
 
 export const Register = () => {
 
     return(
         <div>
-            <h1>Register</h1>
+            <Navbar/>
             <RegistrationForm/>
         </div>
     )
