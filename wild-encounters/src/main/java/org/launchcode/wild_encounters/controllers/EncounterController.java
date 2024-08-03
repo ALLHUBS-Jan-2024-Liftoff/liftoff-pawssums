@@ -21,23 +21,31 @@ public class EncounterController {
     }
 
     @PostMapping("/add")
-    public Encounter addNewEncounter(@RequestParam String animal, @RequestParam String description){
+    public Encounter addNewEncounter(@RequestParam String animal, @RequestParam String description) {
         Encounter newEncounter = new Encounter();
         newEncounter.setAnimal(animal);
         newEncounter.setDescription(description);
         return encounterRepository.save(newEncounter);
     }
 
-    @PostMapping("delete/{id}")
-    public String deleteEncounter(@PathVariable("id") Long id){
-        encounterRepository.deleteById(id);
-        return "redirect:/encounters";
+    @PostMapping("/delete")
+    public void deleteEncounter(@RequestParam Long encounterId) {
+        encounterRepository.deleteById((encounterId));
+
+
+//    public String deleteEncounter(@PathVariable("id") Long id){
+//        encounterRepository.deleteById(id);
+//        return "redirect:/encounters";
     }
 
-    @GetMapping("edit/{id}")
-    public String editEncounter(@PathVariable("id") Long id, Model model){
-        model.addAttribute("encounter", encounterRepository.findById(id));
-        return "encounter/add";
+//    @GetMapping("/edit")
+//    public String editEncounter(@PathVariable("id") Long id, Model model) {
+//        Encounter encounter = encounterRepository.getReferenceById(id);
+//        model.addAttribute("encounter", encounter);
+//        return null;
+//    }
+//    public String editEncounter(@PathVariable("id") Long id, Model model){
+//        model.addAttribute("encounter", encounterRepository.findById(id));
+//        return "encounter/add";
     }
 
-}
