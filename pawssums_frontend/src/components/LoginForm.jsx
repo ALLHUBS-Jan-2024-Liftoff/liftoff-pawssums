@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { loginUser } from '../services/UserService'; 
 
 export const LoginForm = () => {
     const [values, setValues] = useState({
@@ -7,15 +8,26 @@ export const LoginForm = () => {
         password:''
     })
     
+    // const handleInput = (event) => {
+    //     setValues(prev => ({...prev, [event.target.name]: [event.target.value]}))
+    // };
+    
     const handleInput = (event) => {
-        setValues(prev => ({...prev, [event.target.name]: [event.target.value]}))
-    }
+        const { name, value } = event.target;
+        setValues(prev => ({ ...prev, [name]: value }));
+    };
 
-    const handleSubmit = (event) => {
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log("it's working!");
+        try {
+            const response = await loginUser(values.email, values.password);
+            console.log('Login successful:', response);
+        } catch (error) {
+            console.error('Login failed:', error);
+        }
 
-    }
+    };
 
     return(
         <div className="d-flex justify-content-center align-items-center vh-100">

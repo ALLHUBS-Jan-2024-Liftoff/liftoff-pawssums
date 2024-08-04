@@ -1,21 +1,28 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { registerUser } from '../services/UserService';
 
 export const RegistrationForm = () => {
     const [values, setValues] = useState({
         name:'',
         email:'',
         password:''
-    })
-    
-    const handleInput = (event) => {
-        setValues(prev => ({...prev, [event.target.name]: [event.target.value]}))
-    }
+    });
 
-    const handleSubmit = (event) => {
+    const handleInput = (event) => {
+        const { name, value } = event.target;
+        setValues(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log("it's working!");
-    }
+        try {
+            const response = await registerUser(values.name, values.email, values.password);
+            console.log('Registration successful:', response);
+        } catch (error) {
+            console.error('Registration failed:', error);
+        }
+    };
 
     return(
         <div className="d-flex justify-content-center align-items-center vh-100">
@@ -23,16 +30,16 @@ export const RegistrationForm = () => {
                 <h2>Register</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
-                        <label class="form-label" htmlFor="name">Name</label>
-                        <input class="form-control" type="text" id="name" name="name" placeholder="Enter name" onChange={handleInput}  ></input>
+                        <label className="form-label" htmlFor="name">Name</label>
+                        <input className="form-control" type="text" id="name" name="name" placeholder="Enter name" onChange={handleInput}  ></input>
                     </div>
                     <div className="mb-3">
-                        <label class="form-label" htmlFor="email">E-mail</label>
-                        <input class="form-control" type="email" id="email" name="email" placeholder="Enter e-mail" onChange={handleInput} ></input>
+                        <label className="form-label" htmlFor="email">E-mail</label>
+                        <input className="form-control" type="email" id="email" name="email" placeholder="Enter e-mail" onChange={handleInput} ></input>
                     </div>
                     <div className="mb-3">
-                        <label class="form-label" htmlFor="password">Password</label>
-                        <input class="form-control" type="password" id="password" name="password" placeholder="Enter password" onChange={handleInput}  ></input>
+                        <label className="form-label" htmlFor="password">Password</label>
+                        <input className="form-control" type="password" id="password" name="password" placeholder="Enter password" onChange={handleInput}  ></input>
                     </div>
                     <button className="btn btn-success border w-100" type="submit">Register</button>
                     <Link to="/login" className="btn btn-link w-100">Already have an account? Log in</Link>
