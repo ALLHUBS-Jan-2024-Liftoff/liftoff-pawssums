@@ -1,6 +1,5 @@
 package org.launchcode.wild_encounters.data;
 
-import org.apache.catalina.User;
 import org.launchcode.wild_encounters.models.UserInfo;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
