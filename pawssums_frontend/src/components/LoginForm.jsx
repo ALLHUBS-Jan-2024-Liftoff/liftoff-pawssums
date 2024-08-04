@@ -11,7 +11,7 @@ export const LoginForm = () => {
     // const handleInput = (event) => {
     //     setValues(prev => ({...prev, [event.target.name]: [event.target.value]}))
     // };
-    
+
     const handleInput = (event) => {
         const { name, value } = event.target;
         setValues(prev => ({ ...prev, [name]: value }));
@@ -33,7 +33,7 @@ export const LoginForm = () => {
         <div className="d-flex justify-content-center align-items-center vh-100">
             <div className="bg-light p-3 border rounded w-25">
                 <h2>Login</h2>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} method="POST">
                 <div className="mb-3">
                     <label class="form-label" htmlFor="email">E-mail</label>
                     <input class="form-control" type="email" id="email" name="email" placeholder="Enter e-mail" onChange={handleInput} ></input>
