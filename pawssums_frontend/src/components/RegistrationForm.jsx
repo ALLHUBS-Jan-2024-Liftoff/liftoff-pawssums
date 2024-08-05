@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { registerUser } from '../services/UserService';
 
 export const RegistrationForm = () => {
@@ -8,6 +8,7 @@ export const RegistrationForm = () => {
         email:'',
         password:''
     });
+    const navigate = useNavigate();
 
     const handleInput = (event) => {
         const { name, value } = event.target;
@@ -19,6 +20,7 @@ export const RegistrationForm = () => {
         try {
             const response = await registerUser(values.name, values.email, values.password);
             console.log('Registration successful:', response);
+            navigate('/profile');
         } catch (error) {
             console.error('Registration failed:', error);
         }
