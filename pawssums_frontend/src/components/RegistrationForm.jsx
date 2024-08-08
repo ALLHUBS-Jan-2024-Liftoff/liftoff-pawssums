@@ -20,6 +20,7 @@ export const RegistrationForm = () => {
         try {
             const response = await registerUser(values.name, values.email, values.password);
             console.log('Registration successful:', response);
+            localStorage.setItem('token', response.token);
             navigate('/profile');
         } catch (error) {
             console.error('Registration failed:', error);

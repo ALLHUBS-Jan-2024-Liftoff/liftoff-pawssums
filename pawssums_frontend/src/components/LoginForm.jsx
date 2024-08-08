@@ -20,6 +20,7 @@ export const LoginForm = () => {
         try {
             const response = await loginUser(values.email, values.password);
             console.log('Login successful:', response);
+            localStorage.setItem('token', response.token);
             navigate('/profile');
         } catch (error) {
             console.error('Login failed:', error);
