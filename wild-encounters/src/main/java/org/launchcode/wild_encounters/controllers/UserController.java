@@ -1,6 +1,5 @@
 package org.launchcode.wild_encounters.controllers;
 
-import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
 import org.launchcode.wild_encounters.JwtService;
 import org.launchcode.wild_encounters.data.UserRepository;

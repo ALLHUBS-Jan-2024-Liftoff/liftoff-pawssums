@@ -34,7 +34,6 @@ public class JwtService {
     public String generateToken(UserInfo user) {
         return Jwts.builder()
                 .setSubject(user.getEmail())
-                .claim("role", user.getRole())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
                 .signWith(secretKey)
