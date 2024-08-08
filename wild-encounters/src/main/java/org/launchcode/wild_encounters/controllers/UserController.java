@@ -1,5 +1,7 @@
 package org.launchcode.wild_encounters.controllers;
 
+import io.jsonwebtoken.Claims;
+import jakarta.servlet.http.HttpServletRequest;
 import org.launchcode.wild_encounters.JwtService;
 import org.launchcode.wild_encounters.data.UserRepository;
 import org.launchcode.wild_encounters.models.UserInfo;
@@ -70,6 +72,26 @@ public class UserController {
         response.put("token", token);
         response.put("user", user);
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/profile")
+    public ResponseEntity<?> getUserProfile(HttpServletRequest request) {
+        String authorizationHeader = request.getHeader("Authorization");
+
+        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Missing or invalid Authorization header");
+        }
+
+        String token = authorizationHeader.substring(7); // Remove "Bearer " prefix
+        String email = jwtService.extractUsername(token);
+
+        Optional<UserInfo> optionalUser = userRepository.findByEmail(email);
+        if (!optionalUser.isPresent()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not found");
+        }
+
+        UserInfo user = optionalUser.get();
+        return ResponseEntity.ok(user);
     }
 
 }
