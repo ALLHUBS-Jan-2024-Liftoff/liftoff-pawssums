@@ -10,40 +10,11 @@ import { Search } from './components/pages/Search';
 import { useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import {
-    APIProvider,
-    Map,
-    AdvancedMarker,
-    Pin,
-    InfoWindow,} from "@vis.gl/react-google-maps";
 
 function App() {
-  const positionSTL = {lat: 38.62 ,lng:-90.19};
-  const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
-
   return (
   <Router>
-    <>
-    <APIProvider apiKey="AIzaSyBB-kFmMyRJ7xPlGzMxPHfYVvtzSTUDDsg">
-      <div style = {{height: "60vh", width: "100vh"}}>
-          <Map defaultZoom={9}
-               defaultCenter={positionSTL}
-               mapId="7c334410935a7458">
-          <AdvancedMarker position={positionSTL} onClick={() => setOpen(true)}>
-              <Pin
-                background={"green"}
-                borderColor={"orange"}
-                glyphColor={"orange"}
-                />
-              </AdvancedMarker>
-          </Map>
-          {open && <InfoWindow position={positionSTL} onCloseClick={() => setOpen(false)}>
-              <h1>Animal Sighted!</h1>
-          </InfoWindow>}
 
-      </div>
-    </APIProvider>
 
     <Routes>
               <Route path="/home" element={<Home />} />
@@ -55,7 +26,7 @@ function App() {
               <Route path="/search" element={<Search />} />
               <Route path="/" element={<Home />} />
             </Routes>
-    </>
+
     </Router>
   );
 }
