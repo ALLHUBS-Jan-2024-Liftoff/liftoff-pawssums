@@ -21,8 +21,8 @@ export const EncounterList = () => {
       });
   }, []);
 
-  const handleAddEncounter = (animal, description) => {
-    addNewEncounter(animal, description)
+  const handleAddEncounter = (animal, description, latitude, longitude) => {
+    addNewEncounter(animal, description, latitude, longitude)
       .then((newEncounter) => {
         setEncounters([...encounters, newEncounter]);
       })
@@ -31,8 +31,8 @@ export const EncounterList = () => {
       });
   };
 
-   const handleEditEncounter = (id, animal, description) => {
-      editEncounter(id, animal, description)
+   const handleEditEncounter = (id, animal, description, latitude, longitude) => {
+      editEncounter(id, animal, description, latitude, longitude)
         .then((updatedEncounter) => {
           setEncounters(
             encounters.map((enc) => (enc.id === id ? updatedEncounter : enc))
@@ -58,17 +58,29 @@ return (
     <div>
       <Navbar />
       <h1>Encounter List</h1>
-      <button onClick={() => setShowEncounterForm(!showEncounterForm)}>
+      <button onClick={() => {
+      setShowEncounterForm(!showEncounterForm);
+      setEditingEncounter(null);
+      }}>
         {showEncounterForm ? "Cancel" : "Add Encounter"}
       </button>
-      {showEncounterForm && (
-        <EncounterForm onAddEncounter={handleAddEncounter} />
-      )}
+      {(showEncounterForm || editingEncounter) && (
+       <EncounterForm
+               onSubmit={editingEncounter ? (animal, description, latitude, longitude) =>
+               handleEditEncounter(editingEncounter.id, animal, description, latitude, longitude) : handleAddEncounter}
+               initialAnimal={editingEncounter?.animal || ""}
+               initialDescription={editingEncounter?.description || ""}
+               initialLatitude={editingEncounter?.latitude || ""}
+               initialLongitude={editingEncounter?.longitude || ""}
+             />
+           )}
       <table className="table table-hover">
         <thead>
           <tr>
             <th scope="col">Animal</th>
             <th scope="col">Description</th>
+            <th scope="col">Latitude</th>
+            <th scope="col">Longitude</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -77,6 +89,8 @@ return (
             <tr key={encounter.id}>
               <td>{encounter.animal}</td>
               <td>{encounter.description}</td>
+              <td>{encounter.latitude}</td>
+              <td>{encounter.longitude}</td>
               <td>
                 <button onClick={() => setEditingEncounter(encounter)}>Edit</button>
                 <button onClick={() => handleDeleteEncounter(encounter.id)}>Delete</button>
@@ -85,15 +99,6 @@ return (
           ))}
         </tbody>
       </table>
-      {editingEncounter && (
-        <EncounterForm
-          onAddEncounter={(animal, description) =>
-            handleEditEncounter(editingEncounter.id, animal, description)
-          }
-          initialAnimal={editingEncounter.animal}
-          initialDescription={editingEncounter.description}
-        />
-      )}
     </div>
   );
 };

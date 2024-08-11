@@ -12,10 +12,10 @@ export const fetchEncounters = async () => {
         }
        };
 
-   export const addNewEncounter = async (animal, description) => {
+   export const addNewEncounter = async (animal, description, latitude, longitude) => {
      try {
        const response = await axios.post(`${BASEAPIURL}/add`, null, {
-       params: {animal, description}
+       params: {animal, description, latitude, longitude}
        });
        return response.data;
      } catch (error) {
@@ -24,7 +24,6 @@ export const fetchEncounters = async () => {
      }
    };
 
-//Code to delete encouter
    export const deleteEncounter = async (encounterId) => {
      try {
        await axios.post(`${BASEAPIURL}/delete`, null, {
@@ -36,11 +35,15 @@ export const fetchEncounters = async () => {
      }
    };
 
-   export const editEncounter = async (id, animal, description) => {
+   export const editEncounter = async (id, animal, description, latitude, longitude) => {
         try {
-          await axios.post(`${BASEAPIURL}/edit`, null, {
-            params: { encounterId },
+          const response = await axios.post(`${BASEAPIURL}/edit/{id}`, {
+            animal,
+            description,
+            latitude,
+            longitude
           });
+          return response.data;
         } catch (error) {
           console.error("Error: not able to edit encounter!", error);
           throw error;

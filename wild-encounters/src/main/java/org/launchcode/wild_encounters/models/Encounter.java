@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
+import java.util.LongSummaryStatistics;
+
 @Entity
 public class Encounter {
     @Id
@@ -15,6 +17,11 @@ public class Encounter {
     private Double latitude;
 
     private Double longitude;
+
+
+    public Encounter(){
+
+    }
 
     public Double getLatitude() {
         return latitude;
@@ -30,10 +37,6 @@ public class Encounter {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
-    }
-
-    public Encounter(){
-
     }
 
     public Long getId() {
