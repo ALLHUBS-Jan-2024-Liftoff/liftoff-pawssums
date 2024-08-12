@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchUserProfile } from '../../services/UserService';
-import {Navbar} from '../Navbar'
+import { Navbar } from '../Navbar';
+import { Link } from 'react-router-dom';
 
 export const Profile = () => {
     const [profile, setProfile] = useState(null);
@@ -15,6 +16,8 @@ export const Profile = () => {
                 if (token) {
                     const userProfile = await fetchUserProfile(token);
                     setProfile(userProfile);
+                } else {
+                    setError('No token found.');
                 }
             } catch (error) {
                 console.error('Failed to fetch profile:', error);
@@ -31,8 +34,7 @@ export const Profile = () => {
         return (
             <div>
                 <Navbar />
-                <h1>Profile</h1>
-                <p>Loading profile...</p>
+                <h1>Loading...</h1>
             </div>
         );
     }
@@ -50,15 +52,25 @@ export const Profile = () => {
     return (
         <div>
             <Navbar />
-            <h1>Profile</h1>
-            {profile ? (
-                <div>
-                    <p>Name: {profile.name}</p>
-                    <p>Email: {profile.email}</p>
+            <div className="d-flex justify-content-center align-items-center vh-100">
+                <div className="bg-light p-3 border rounded w-50 d-flex flex-row">
+                    <div className="bg-white p-3 border rounded m-5 w-50">
+                        <h1 className="text-center p-2">Profile</h1>
+                        <div className="bg-light border rounded d-flex flex-row align-items-center justify-content-start p-2">
+                            <p className="mb-0"><strong>Name: </strong></p>
+                            <p className="mb-0 ms-2">{profile.name}</p>
+                        </div>
+                        <div className="bg-light border rounded d-flex flex-row align-items-center justify-content-start p-2 mt-2">
+                            <p className="mb-0"><strong>Email: </strong></p>
+                            <p className="mb-0 ms-2">{profile.email}</p>
+                        </div>
+                        <Link to="/register-encounter" className="btn btn-primary ms-auto w-100 p-2 mt-2">Register Encounter</Link>
+                    </div>
+                    <div className="bg-white p-3 border rounded m-5 w-50">
+                        <h1 className="text-center">MAP</h1>
+                    </div>
                 </div>
-            ) : (
-                <p>No profile information available.</p>
-            )}
+            </div>
         </div>
     );
 };
