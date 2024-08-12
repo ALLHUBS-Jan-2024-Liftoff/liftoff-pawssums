@@ -1,9 +1,9 @@
 package org.launchcode.wild_encounters.controllers;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.launchcode.wild_encounters.JwtService;
 import org.launchcode.wild_encounters.data.UserRepository;
 import org.launchcode.wild_encounters.models.UserInfo;
-import org.launchcode.wild_encounters.models.UserRegistrationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,18 +33,14 @@ public class UserController {
         return ResponseEntity.ok("API is working");
     }
 
-
     @PostMapping("/newUser")
-    public ResponseEntity<?> createUser(@RequestBody UserRegistrationRequest request) {
+    public ResponseEntity<?> createUser(@RequestBody UserInfo newUser) {
 
-        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
+        if (userRepository.findByEmail(newUser.getEmail()).isPresent()) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Email already exists");
         }
 
-        UserInfo newUser = new UserInfo();
-        newUser.setEmail(request.getEmail());
-        newUser.setName(request.getName());
-        newUser.setPassword(passwordEncoder.encode(request.getPassword()));
+        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
         userRepository.save(newUser);
         return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
     }
@@ -70,6 +66,26 @@ public class UserController {
         response.put("token", token);
         response.put("user", user);
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/profile")
+    public ResponseEntity<?> getUserProfile(HttpServletRequest request) {
+        String authorizationHeader = request.getHeader("Authorization");
+
+        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Missing or invalid Authorization header");
+        }
+
+        String token = authorizationHeader.substring(7); // Remove "Bearer " prefix
+        String email = jwtService.extractUsername(token);
+
+        Optional<UserInfo> optionalUser = userRepository.findByEmail(email);
+        if (!optionalUser.isPresent()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not found");
+        }
+
+        UserInfo user = optionalUser.get();
+        return ResponseEntity.ok(user);
     }
 
 }
