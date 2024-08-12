@@ -4,7 +4,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.launchcode.wild_encounters.JwtService;
 import org.launchcode.wild_encounters.data.UserRepository;
 import org.launchcode.wild_encounters.models.UserInfo;
-import org.launchcode.wild_encounters.models.UserRegistrationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,18 +33,14 @@ public class UserController {
         return ResponseEntity.ok("API is working");
     }
 
-
     @PostMapping("/newUser")
-    public ResponseEntity<?> createUser(@RequestBody UserRegistrationRequest request) {
+    public ResponseEntity<?> createUser(@RequestBody UserInfo newUser) {
 
-        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
+        if (userRepository.findByEmail(newUser.getEmail()).isPresent()) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Email already exists");
         }
 
-        UserInfo newUser = new UserInfo();
-        newUser.setEmail(request.getEmail());
-        newUser.setName(request.getName());
-        newUser.setPassword(passwordEncoder.encode(request.getPassword()));
+        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
         userRepository.save(newUser);
         return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
     }
