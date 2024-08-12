@@ -32,7 +32,7 @@ export const EncounterList = () => {
   };
 
    const handleEditEncounter = (id, animal, description, latitude, longitude) => {
-      editEncounter(id, animal, description, latitude, longitude)
+      editEncounter(animal, description, latitude, longitude)
         .then((updatedEncounter) => {
           setEncounters(
             encounters.map((enc) => (enc.id === id ? updatedEncounter : enc))
