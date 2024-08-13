@@ -51,44 +51,22 @@ export const Profile = () => {
     }
 
     return (
-        // <div>
-        //     <Navbar />
-        //     <div className="d-flex justify-content-center align-items-center vh-100">
-        //         <div className="bg-light p-3 border rounded w-50 d-flex flex-row">
-        //             <div className="bg-white p-3 border rounded m-5 w-50">
-        //                 <h1 className="text-center p-2">Profile</h1>
-        //                 <div className="bg-light border rounded d-flex flex-row align-items-center justify-content-start p-2">
-        //                     <p className="mb-0"><strong>Name: </strong></p>
-        //                     <p className="mb-0 ms-2">{profile.name}</p>
-        //                 </div>
-        //                 <div className="bg-light border rounded d-flex flex-row align-items-center justify-content-start p-2 mt-2">
-        //                     <p className="mb-0"><strong>Email: </strong></p>
-        //                     <p className="mb-0 ms-2">{profile.email}</p>
-        //                 </div>
-        //                 <Link to="/register-encounter" className="btn btn-primary ms-auto w-100 p-2 mt-2">Register Encounter</Link>
-        //             </div>
-        //             <div className="bg-white p-3 border rounded m-5 w-50">
-        //                 <h1 className="text-center">MAP</h1>
-        //                 <MapApp/>
-        //             </div>
-        //         </div>
-        //     </div>
-        // </div>
         <div>
             <Navbar />
             <div className="d-flex justify-content-center align-items-center vh-100">
                 <div className="bg-light p-3 border rounded w-75 d-flex flex-row">
                     <div className="bg-white p-3 border rounded me-3 flex-grow-1" style={{ minWidth: '300px', maxWidth: '600px' }}>
                         <h1 className="text-center p-2">Profile</h1>
-                        <div className="bg-light border rounded d-flex flex-row align-items-center justify-content-start p-2">
+                        <div className="bg-light border rounded d-flex flex-row align-items-center justify-content-start p-2 mb-3">
                             <p className="mb-0"><strong>Name: </strong></p>
                             <p className="mb-0 ms-2">{profile.name}</p>
                         </div>
-                        <div className="bg-light border rounded d-flex flex-row align-items-center justify-content-start p-2 mt-2">
+                        <div className="bg-light border rounded d-flex flex-row align-items-center justify-content-start p-2 mb-3">
                             <p className="mb-0"><strong>Email: </strong></p>
                             <p className="mb-0 ms-2">{profile.email}</p>
                         </div>
-                        <Link to="/register-encounter" className="btn btn-primary ms-auto w-100 p-2 mt-2">Register Encounter</Link>
+                        <Link to="/register-encounter" className="btn btn-primary ms-auto w-100 p-2 mb-3">Register Encounter</Link>
+                        <Link to="/encounter-list" className="btn btn-primary ms-auto w-100 p-2 mb-3">Encounter List</Link>
                     </div>
                     <div className="bg-white p-3 border rounded flex-grow-3 ms-5" style={{ minWidth: '600px', overflow: 'hidden' }}>
                         <h1 className="text-center">MAP</h1>
