@@ -35,7 +35,9 @@ export const Profile = () => {
         return (
             <div>
                 <Navbar />
-                <h1>Loading...</h1>
+                <div className="spinner-border text-primary" role="status">
+                <span className="visually-hidden">Loading...</span>
+    </div>
             </div>
         );
     }
@@ -44,8 +46,7 @@ export const Profile = () => {
         return (
             <div>
                 <Navbar />
-                <h1>Profile</h1>
-                <p>{error}</p>
+                <p className="alert alert-warning" role="alert">{error}</p>
             </div>
         );
     }

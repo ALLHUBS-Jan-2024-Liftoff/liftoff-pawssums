@@ -8,6 +8,7 @@ export const RegistrationForm = () => {
         email:'',
         password:''
     });
+    const [error, setError] = useState(''); 
     const navigate = useNavigate();
 
     const handleInput = (event) => {
@@ -24,6 +25,7 @@ export const RegistrationForm = () => {
             navigate('/login');
         } catch (error) {
             console.error('Registration failed:', error);
+            setError('Registration failed. Please check your informations and try again.');
         }
     };
 
@@ -31,6 +33,11 @@ export const RegistrationForm = () => {
         <div className="d-flex justify-content-center align-items-center vh-100">
             <div className="bg-light p-3 border rounded w-25">
                 <h2>Register</h2>
+                {error && (
+                    <div className="alert alert-warning" role="alert">
+                        {error}
+                    </div>
+                )}
                 <form onSubmit={handleSubmit} method="POST">
                     <div className="mb-3">
                         <label className="form-label" htmlFor="name">Name</label>

@@ -7,6 +7,7 @@ export const LoginForm = () => {
         email:'',
         password:''
     });
+    const [error, setError] = useState('');
     const navigate = useNavigate();
 
     const handleInput = (event) => {
@@ -24,6 +25,7 @@ export const LoginForm = () => {
             navigate('/profile');
         } catch (error) {
             console.error('Login failed:', error);
+            setError('Login failed. Please check your email and password.');
         }
 
     };
@@ -32,6 +34,11 @@ export const LoginForm = () => {
         <div className="d-flex justify-content-center align-items-center vh-100">
             <div className="bg-light p-3 border rounded w-25">
                 <h2>Login</h2>
+                {error && (
+                    <div className="alert alert-warning" role="alert">
+                        {error}
+                    </div>
+                )}
                 <form onSubmit={handleSubmit} method="POST">
                 <div className="mb-3">
                     <label className="form-label" htmlFor="email">E-mail</label>
