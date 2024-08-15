@@ -42,3 +42,7 @@ export const fetchUserProfile = async (token) => {
         throw error;
     }
 };
+
+export const logoutUser = () => {
+    localStorage.removeItem('token');
+};

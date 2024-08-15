@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { fetchUserProfile } from '../../services/UserService';
+import { fetchUserProfile, logoutUser  } from '../../services/UserService';
 import { Navbar } from '../Navbar';
 import { Link } from 'react-router-dom';
 import { MapApp } from '../MapApp';
@@ -9,6 +9,7 @@ export const Profile = () => {
     const [profile, setProfile] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchProfile = async () => {
@@ -30,6 +31,11 @@ export const Profile = () => {
 
         fetchProfile();
     }, []);
+
+    const handleLogout = () => {
+        logoutUser();
+        navigate('/login');
+    };
 
     if (loading) {
         return (
@@ -68,6 +74,7 @@ export const Profile = () => {
                         </div>
                         <Link to="/register-encounter" className="btn btn-primary ms-auto w-100 p-2 mb-3">Register Encounter</Link>
                         <Link to="/encounter-list" className="btn btn-primary ms-auto w-100 p-2 mb-3">Encounter List</Link>
+                        <button onClick={handleLogout} className="btn btn-danger ms-auto w-100 p-2 mb-3">Logout</button>
                     </div>
                     <div className="bg-white p-3 border rounded flex-grow-3 ms-5" style={{ minWidth: '600px', overflow: 'hidden' }}>
                         <h1 className="text-center">MAP</h1>
