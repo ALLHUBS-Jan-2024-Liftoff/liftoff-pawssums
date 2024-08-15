@@ -78,7 +78,7 @@ export const Profile = () => {
                     </div>
                     <div className="bg-white p-3 border rounded flex-grow-3 ms-5" style={{ minWidth: '600px', overflow: 'hidden' }}>
                         <h1 className="text-center">MAP</h1>
-                        <div style={{ width: '100%', height: '500px', overflow: 'hidden' }}>
+                        <div style={{ width: '100%', height: '500px', overflow: 'hidden'}}>
                             <MapApp />
                         </div>
                     </div>
