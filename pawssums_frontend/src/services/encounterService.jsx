@@ -12,10 +12,13 @@ export const fetchEncounters = async () => {
         }
        };
 
-   export const addNewEncounter = async (animal, description, latitude, longitude) => {
+   export const addNewEncounter = async (animal, description, latitude, longitude, token) => {
      try {
        const response = await axios.post(`${BASEAPIURL}/add`, null, {
-       params: {animal, description, latitude, longitude}
+       params: {animal, description, latitude, longitude},
+       headers: {
+        Authorization: `Bearer ${token}`
+        }
        });
        return response.data;
      } catch (error) {
@@ -24,10 +27,13 @@ export const fetchEncounters = async () => {
      }
    };
 
-   export const deleteEncounter = async (encounterId) => {
+   export const deleteEncounter = async (encounterId, token) => {
      try {
        await axios.post(`${BASEAPIURL}/delete`, null, {
          params: { encounterId },
+         headers: {
+          Authorization: `Bearer ${token}`
+        }
        });
      } catch (error) {
        console.error("Error: not able to delete encounter!", error);
@@ -35,10 +41,13 @@ export const fetchEncounters = async () => {
      }
    };
 
-   export const editEncounter = async (id, animal, description, latitude, longitude) => {
+   export const editEncounter = async (id, animal, description, latitude, longitude, token) => {
         try {
-          const response = await axios.put(`${BASEAPIURL}/edit/${id}`, {
+          const response = await axios.put(`${BASEAPIURL}/edit/${id}`, null, {
           params: {animal, description, latitude, longitude},
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
           });
           return response.data;
         } catch (error) {
