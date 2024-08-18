@@ -1,7 +1,11 @@
 package org.launchcode.wild_encounters.controllers;
 
+import jakarta.servlet.http.HttpServletRequest;
+import org.launchcode.wild_encounters.JwtService;
 import org.launchcode.wild_encounters.data.EncounterRepository;
+import org.launchcode.wild_encounters.data.UserRepository;
 import org.launchcode.wild_encounters.models.Encounter;
+import org.launchcode.wild_encounters.models.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +20,11 @@ public class EncounterController {
     @Autowired
     private EncounterRepository encounterRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private JwtService jwtService;
 
     @GetMapping
     public Iterable<Encounter> getAllEncounters() {
@@ -24,12 +33,27 @@ public class EncounterController {
 
     @PostMapping("/add")
     public Encounter addNewEncounter(@RequestParam String animal, @RequestParam String description,
-                                     @RequestParam Double latitude, @RequestParam Double longitude) {
+                                     @RequestParam Double latitude, @RequestParam Double longitude, HttpServletRequest request) {
+
+        String authorizationHeader = request.getHeader("Authorization");
+        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
+            throw new RuntimeException("Missing or invalid Authorization header");
+        }
+
+        String token = authorizationHeader.substring(7);
+        String email = jwtService.extractUsername(token);
+
+        UserInfo user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
         Encounter newEncounter = new Encounter();
         newEncounter.setAnimal(animal);
         newEncounter.setDescription(description);
         newEncounter.setLatitude(latitude);
         newEncounter.setLongitude(longitude);
+
+        newEncounter.setUserInfo(user);
+
         return encounterRepository.save(newEncounter);
     }
 
