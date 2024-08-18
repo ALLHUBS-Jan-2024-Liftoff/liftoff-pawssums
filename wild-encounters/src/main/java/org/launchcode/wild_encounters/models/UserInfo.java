@@ -1,9 +1,9 @@
 package org.launchcode.wild_encounters.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class UserInfo {
@@ -16,6 +16,9 @@ public class UserInfo {
     private String name;
 
     private String password;
+
+    @OneToMany(mappedBy = "userInfo", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Encounter> encounters = new ArrayList<>();
 
 
     public UserInfo() {
@@ -53,4 +56,11 @@ public class UserInfo {
         this.password = password;
     }
 
+    public List<Encounter> getEncounters() {
+        return encounters;
+    }
+
+    public void setEncounters(List<Encounter> encounters) {
+        this.encounters = encounters;
+    }
 }
