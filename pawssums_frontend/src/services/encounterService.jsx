@@ -38,7 +38,7 @@ export const fetchEncounters = async () => {
    export const editEncounter = async (id, animal, description, latitude, longitude) => {
         try {
           const response = await axios.put(`${BASEAPIURL}/edit/${id}`, {
-          params: {animal, description, latitude, longitude},
+         animal, description, latitude, longitude,
           });
           return response.data;
         } catch (error) {

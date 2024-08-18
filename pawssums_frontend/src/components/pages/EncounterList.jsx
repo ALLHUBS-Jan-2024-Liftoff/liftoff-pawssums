@@ -38,6 +38,8 @@ export const EncounterList = () => {
             encounters.map((enc) => (enc.id === id ? updatedEncounter : enc))
           );
           setEditingEncounter(null);
+          setShowEncounterForm(false);
+//           hides form after pressing update
         })
         .catch((error) => {
           console.error("There was an error editing the encounter", error);
@@ -66,13 +68,20 @@ return (
       </button>
       {(showEncounterForm || editingEncounter) && (
        <EncounterForm
-               onSubmit={editingEncounter ? (animal, description, latitude, longitude) =>
-               handleEditEncounter(editingEncounter.id, animal, description, latitude, longitude) : handleAddEncounter}
-               initialAnimal={editingEncounter?.animal || ""}
-               initialDescription={editingEncounter?.description || ""}
-               initialLatitude={editingEncounter?.latitude || ""}
-               initialLongitude={editingEncounter?.longitude || ""}
-             />
+        encounterID={editingEncounter?.id || null}
+                 initialAnimal={editingEncounter?.animal || ""}
+                 initialDescription={editingEncounter?.description || ""}
+                 initialLatitude={editingEncounter?.latitude || ""}
+                 initialLongitude={editingEncounter?.longitude || ""}
+                 onSubmit={editingEncounter ? handleEditEncounter : handleAddEncounter}
+               />
+//                onSubmit={editingEncounter ? (animal, description, latitude, longitude) =>
+//                handleEditEncounter(editingEncounter.id, animal, description, latitude, longitude) : handleAddEncounter}
+//                initialAnimal={editingEncounter?.animal || ""}
+//                initialDescription={editingEncounter?.description || ""}
+//                initialLatitude={editingEncounter?.latitude || ""}
+//                initialLongitude={editingEncounter?.longitude || ""}
+//              />
            )}
       <table className="table table-hover">
         <thead>

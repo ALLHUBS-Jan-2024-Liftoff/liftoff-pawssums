@@ -16,6 +16,7 @@ export const EncounterForm = ({
   const [longitude, setLongitude] = useState("");
 
 useEffect(() => {
+console.log("Editing encounter data:", initialAnimal, initialDescription, initialLatitude, initialLongitude);
     setAnimal(initialAnimal);
     setDescription(initialDescription);
     setLatitude(initialLatitude);
@@ -24,9 +25,14 @@ useEffect(() => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("Form Submitted");
+  console.log("encounterID value:", encounterID);
+  console.log("Data to be sent:", { animal, description, latitude, longitude });
     if (encounterID) {
+        console.log("Editing existing encounter:", encounterID);
     editEncounter(encounterID, animal, description, latitude, longitude)
         .then((updatedEncounter) => {
+        console.log("Encounter updated successfully:", updatedEncounter);
           onSubmit(updatedEncounter);
           });
     } else {
