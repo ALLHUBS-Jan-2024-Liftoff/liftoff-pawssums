@@ -1,5 +1,6 @@
 package org.launchcode.wild_encounters.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.LongSummaryStatistics;
@@ -17,7 +18,8 @@ public class Encounter {
     private Double longitude;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    @JoinColumn(name = "user_id", nullable = false)
     private UserInfo userInfo;
 
 

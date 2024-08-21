@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -26,10 +27,27 @@ public class EncounterController {
     @Autowired
     private JwtService jwtService;
 
-    @GetMapping
+    @GetMapping("/all")
     public Iterable<Encounter> getAllEncounters() {
         return encounterRepository.findAll();
     }
+
+    @GetMapping
+    public List<Encounter> getUserEncounters(HttpServletRequest request) {
+        String authorizationHeader = request.getHeader("Authorization");
+        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
+            throw new RuntimeException("Missing or invalid Authorization header");
+        }
+
+        String token = authorizationHeader.substring(7);
+        String email = jwtService.extractUsername(token);
+
+        UserInfo user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return encounterRepository.findByUserInfo(user);
+    }
+
 
     @PostMapping("/add")
     public Encounter addNewEncounter(@RequestParam String animal, @RequestParam String description,
