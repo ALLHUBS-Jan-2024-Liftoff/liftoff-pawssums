@@ -6,7 +6,12 @@ const BASEAPIURL = "http://localhost:8080/api/encounters";
 
 export const fetchEncounters = async () => {
   try {
-    const response = await axios.get(`${BASEAPIURL}`);
+    const token = getToken();
+    const response = await axios.get(`${BASEAPIURL}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
     return response.data;
   } catch (error) {
     console.error("Error: not able to fetch encounters", error);

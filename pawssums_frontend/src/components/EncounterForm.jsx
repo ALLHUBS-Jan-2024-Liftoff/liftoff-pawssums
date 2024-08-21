@@ -44,7 +44,7 @@ useEffect(() => {
 
    return (
       <div className="d-flex justify-content-center align-items-center vh-100">
-        <div className="bg-light p-3 border rounded w-25">
+        <div className="bg-light p-3 border rounded w-50">
           <h2>{initialAnimal ? "Edit Encounter" : "Register Encounter"}</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">

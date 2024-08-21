@@ -74,7 +74,6 @@ export const Profile = () => {
                             <p className="mb-0"><strong>Email: </strong></p>
                             <p className="mb-0 ms-2">{profile.email}</p>
                         </div>
-                        <Link to="/register-encounter" className="btn btn-primary ms-auto w-100 p-2 mb-3">Register Encounter</Link>
                         <Link to="/encounter-list" className="btn btn-primary ms-auto w-100 p-2 mb-3">Encounter List</Link>
                         <button onClick={handleLogout} className="btn btn-danger ms-auto w-100 p-2 mb-3">Logout</button>
                     </div>
