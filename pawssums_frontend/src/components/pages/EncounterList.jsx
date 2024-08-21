@@ -7,11 +7,14 @@ import {
   deleteEncounter
 } from "../../services/encounterService";
 import {Navbar} from '../Navbar'
+import { useUserID } from '../../services/userIDContext.jsx';
 
 export const EncounterList = () => {
-  const [showEncounterForm, setShowEncounterForm] = useState(false);
-  const [editingEncounter, setEditingEncounter] = useState(null);
-  const [encounters, setEncounters] = useState([]);
+
+    const userID = useUserID();
+    const [showEncounterForm, setShowEncounterForm] = useState(false);
+    const [editingEncounter, setEditingEncounter] = useState(null);
+    const [encounters, setEncounters] = useState([]);
 
   useEffect(() => {
     fetchEncounters()
@@ -22,7 +25,7 @@ export const EncounterList = () => {
   }, []);
 
   const handleAddEncounter = (animal, description, latitude, longitude) => {
-    addNewEncounter(animal, description, latitude, longitude)
+    addNewEncounter(userID, animal, description, latitude, longitude)
       .then((newEncounter) => {
         setEncounters([...encounters, newEncounter]);
       })
@@ -32,7 +35,7 @@ export const EncounterList = () => {
   };
 
    const handleEditEncounter = (id, animal, description, latitude, longitude) => {
-      editEncounter(id, animal, description, latitude, longitude)
+      editEncounter(userID, id, animal, description, latitude, longitude)
         .then((updatedEncounter) => {
           setEncounters(
             encounters.map((enc) => (enc.id === id ? updatedEncounter : enc))
@@ -45,7 +48,7 @@ export const EncounterList = () => {
     };
 
     const handleDeleteEncounter = (id) => {
-      deleteEncounter(id)
+      deleteEncounter(userID, id)
         .then(() => {
           setEncounters(encounters.filter((enc) => enc.id !== id));
         })

@@ -34,6 +34,8 @@ export const Profile = () => {
 
     const handleLogout = () => {
         logoutUser();
+        setProfile(null);
+        setError(null);
         navigate('/login');
     };
 

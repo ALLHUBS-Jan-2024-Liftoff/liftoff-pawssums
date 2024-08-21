@@ -1,18 +1,8 @@
 import axios from 'axios';
-
+import { getToken } from './UserService';
 
 const BASEAPIURL = "http://localhost:8080/api/encounters";
 
-
-// Function to get token from local storage
-const getToken = () => {
-  const token = localStorage.getItem('token');
-  if (!token) {
-    console.error('No token found in local storage');
-    throw new Error('No token found');
-  }
-  return token;
-};
 
 export const fetchEncounters = async () => {
   try {
@@ -24,11 +14,11 @@ export const fetchEncounters = async () => {
   }
 };
 
-export const addNewEncounter = async (animal, description, latitude, longitude) => {
+export const addNewEncounter = async (userID, animal, description, latitude, longitude) => {
   try {
     const token = getToken();
     const response = await axios.post(`${BASEAPIURL}/add`, null, {
-      params: { animal, description, latitude, longitude },
+      params: { userID, animal, description, latitude, longitude },
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -40,11 +30,11 @@ export const addNewEncounter = async (animal, description, latitude, longitude) 
   }
 };
 
-export const deleteEncounter = async (encounterId) => {
+export const deleteEncounter = async (userID, encounterId) => {
   try {
     const token = getToken();
-    await axios.post(`${BASEAPIURL}/delete`, null, {
-      params: { encounterId },
+    await axios.delete(`${BASEAPIURL}/delete`, {
+      data: { userID, encounterId },
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -55,11 +45,11 @@ export const deleteEncounter = async (encounterId) => {
   }
 };
 
-export const editEncounter = async (id, animal, description, latitude, longitude) => {
+export const editEncounter = async (userID, id, animal, description, latitude, longitude) => {
   try {
     const token = getToken();
     const response = await axios.put(`${BASEAPIURL}/edit/${id}`, null, {
-      params: { animal, description, latitude, longitude },
+      params: { userID, animal, description, latitude, longitude },
       headers: {
         Authorization: `Bearer ${token}`
       }

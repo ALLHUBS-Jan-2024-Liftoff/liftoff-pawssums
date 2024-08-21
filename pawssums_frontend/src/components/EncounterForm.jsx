@@ -4,6 +4,7 @@ import { editEncounter } from "../services/encounterService";
 
 export const EncounterForm = ({
     onSubmit,
+    userID,
     initialAnimal = "",
     initialDescription = "",
     initialLatitude = "",
@@ -30,7 +31,7 @@ useEffect(() => {
           onSubmit(updatedEncounter);
           });
     } else {
-      addNewEncounter(animal, description, latitude, longitude)
+      addNewEncounter(userID, animal, description, latitude, longitude)
             .then((newEncounter) => {
               onSubmit(newEncounter);
       setAnimal("");
