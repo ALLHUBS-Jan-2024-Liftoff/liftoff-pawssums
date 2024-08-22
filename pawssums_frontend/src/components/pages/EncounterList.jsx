@@ -17,12 +17,12 @@ export const EncounterList = () => {
   const [encounters, setEncounters] = useState([]);
 
   useEffect(() => {
-    fetchEncounters()
+    fetchEncounters(userID)
       .then(setEncounters)
       .catch((error) => {
         console.error("Error fetching encounters", error);
       });
-  }, []);
+  }, [userID]);
 
   const handleAddEncounter = (animal, description, latitude, longitude) => {
     addNewEncounter(userID, animal, description, latitude, longitude)
@@ -59,9 +59,9 @@ export const EncounterList = () => {
       });
   };
 
-  const handleFormSubmit = (animal, description, latitude, longitude) => {
-    if (editingEncounter) {
-      handleEditEncounter(editingEncounter.id, animal, description, latitude, longitude);
+  const handleFormSubmit = (animal, description, latitude, longitude, encounterID) => {
+    if (encounterID) {
+      handleEditEncounter(encounterID, animal, description, latitude, longitude);
     } else {
       handleAddEncounter(animal, description, latitude, longitude);
     }
@@ -74,10 +74,10 @@ export const EncounterList = () => {
         <div className="bg-light p-3 border rounded w-75 d-flex flex-column align-items-center">
           <h1 className="text-center p-2">Encounter List</h1>
           <button onClick={() => {
-            setShowEncounterForm(!showEncounterForm);
-            setEditingEncounter(null);
-          }} className="btn btn-primary mb-3">
-            {showEncounterForm ? "Cancel" : "Add Encounter"}
+              setShowEncounterForm(!showEncounterForm);
+              setEditingEncounter(null);
+            }} className="btn btn-primary mb-3">
+              {showEncounterForm ? "Cancel" : "Add Encounter"}
           </button>
           {(showEncounterForm || editingEncounter) && (
             <div className="bg-white p-3 border rounded mb-3 w-75">
@@ -88,6 +88,7 @@ export const EncounterList = () => {
                 initialDescription={editingEncounter?.description || ""}
                 initialLatitude={editingEncounter?.latitude || ""}
                 initialLongitude={editingEncounter?.longitude || ""}
+                encounterID={editingEncounter?.id || null}
               />
             </div>
           )}
@@ -110,7 +111,7 @@ export const EncounterList = () => {
                     <td>{encounter.latitude}</td>
                     <td>{encounter.longitude}</td>
                     <td>
-                      <button onClick={() => setEditingEncounter(encounter)} className="btn btn-warning btn-sm me-2">Edit</button>
+                      <button onClick={() => {setEditingEncounter(encounter); setShowEncounterForm(true);}} className="btn btn-warning btn-sm me-2">Edit</button>
                       <button onClick={() => handleDeleteEncounter(encounter.id)} className="btn btn-danger btn-sm">Delete</button>
                     </td>
                   </tr>
