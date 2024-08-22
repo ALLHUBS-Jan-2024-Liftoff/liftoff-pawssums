@@ -39,7 +39,7 @@ export const deleteEncounter = async (userID, encounterId) => {
   try {
     const token = getToken();
     await axios.delete(`${BASEAPIURL}/delete`, {
-      data: { userID, encounterId },
+      data: { encounterId },
       headers: {
         Authorization: `Bearer ${token}`
       }
