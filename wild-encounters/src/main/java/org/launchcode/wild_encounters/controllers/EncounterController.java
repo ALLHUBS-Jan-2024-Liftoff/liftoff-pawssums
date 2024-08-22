@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -75,57 +76,52 @@ public class EncounterController {
         return encounterRepository.save(newEncounter);
     }
 
-    @PostMapping("/delete")
-    public void deleteEncounter(@RequestParam Long encounterId) {
-        encounterRepository.deleteById((encounterId));
+//    @PostMapping("/delete")
+//    public void deleteEncounter(@RequestParam Long encounterId) {
+//        encounterRepository.deleteById((encounterId));
+//    }
+    @DeleteMapping("/delete")
+    public ResponseEntity<Void> deleteEncounter(@RequestBody Map<String, Long> payload) {
+        Long encounterId = payload.get("encounterId");
+        if (encounterRepository.existsById(encounterId)) {
+            encounterRepository.deleteById(encounterId);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 
+//    @PutMapping("/edit/{id}")
+//    public ResponseEntity<Encounter> editEncounter(@PathVariable Long id, @RequestBody Encounter editEncounter) {
+//        return encounterRepository.findById(id)
+//                .map(encounter -> {
+//                    encounter.setAnimal(editEncounter.getAnimal());
+//                    encounter.setDescription(editEncounter.getDescription());
+//                    encounter.setLatitude(editEncounter.getLatitude());
+//                    encounter.setLongitude(editEncounter.getLongitude());
+//                    return ResponseEntity.ok(encounterRepository.save(encounter));
+//                })
+//                .orElseGet(() -> ResponseEntity.notFound().build());
+//    }
+
     @PutMapping("/edit/{id}")
-    public ResponseEntity<Encounter> editEncounter(@PathVariable Long id, @RequestBody Encounter editEncounter) {
+    public ResponseEntity<Encounter> editEncounter(
+            @PathVariable Long id,
+            @RequestParam String animal,
+            @RequestParam String description,
+            @RequestParam double latitude,
+            @RequestParam double longitude) {
+
         return encounterRepository.findById(id)
                 .map(encounter -> {
-                    encounter.setAnimal(editEncounter.getAnimal());
-                    encounter.setDescription(editEncounter.getDescription());
-                    encounter.setLatitude(editEncounter.getLatitude());
-                    encounter.setLongitude(editEncounter.getLongitude());
+                    encounter.setAnimal(animal);
+                    encounter.setDescription(description);
+                    encounter.setLatitude(latitude);
+                    encounter.setLongitude(longitude);
                     return ResponseEntity.ok(encounterRepository.save(encounter));
                 })
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
-
-//    public Encounter editEncounter(
-//            @PathVariable Long id,
-//            @RequestBody Encounter encounterDetails) {
-//        Optional<Encounter> existingEncounter = encounterRepository.findById(id);
-//        if (existingEncounter.isPresent()) {
-//            Encounter encounter = existingEncounter.get();
-//            encounter.setAnimal(encounterDetails.getAnimal());
-//            encounter.setDescription(encounterDetails.getDescription());
-//            encounter.setLatitude(encounterDetails.getLatitude());
-//            encounter.setLongitude(encounterDetails.getLongitude());
-//            return encounterRepository.save(encounter);
-//        } else {
-//            return null;
-//        }
-//    }
-//}
-//
-
-
-//public String updateEncounter(@PathVariable Long id, @RequestBody Encounter encounter) {
-//       if (encounterRepository.existsById(id)) {
-//           Encounter existingEncounter = encounterRepository.findById(id).orElseThrow(() ->
-//                   new ResponseStatusException(HttpStatus.NOT_FOUND, "Encounter not found."));
-//           existingEncounter.setAnimal(encounter.getAnimal());
-//           existingEncounter.setDescription(encounter.getDescription());
-//           existingEncounter.setLatitude(encounter.getLatitude());
-//           existingEncounter.setLongitude(encounter.getLongitude());
-//           encounterRepository.save(existingEncounter);
-//           return "Encounter updated successfully.";
-//       } else {
-//           throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Encounter not found.");
-//       }
-//    }
 
