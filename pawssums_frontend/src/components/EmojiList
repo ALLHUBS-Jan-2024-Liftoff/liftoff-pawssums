@@ -1,0 +1,7 @@
+export const emojiOptions = [
+  { label: "Dog", emoji: "\uD83D\uDC36" },  // 🐶
+  { label: "Cat", emoji: "\uD83D\uDC31" },  // 🐱
+  { label: "Lion", emoji: "\uD83E\uDD81" }, // 🦁
+  { label: "Pig", emoji: "\uD83D\uDC37" },  // 🐷
+  { label: "Frog", emoji: "\uD83D\uDC38" },  // 🐸
+];

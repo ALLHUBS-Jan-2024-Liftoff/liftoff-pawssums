@@ -24,8 +24,8 @@ export const EncounterList = () => {
       });
   }, [userID]);
 
-  const handleAddEncounter = (animal, description, latitude, longitude) => {
-    addNewEncounter(userID, animal, description, latitude, longitude)
+  const handleAddEncounter = (animal, description, latitude, longitude, emoji) => {
+    addNewEncounter(userID, animal, description, latitude, longitude, emoji)
       .then((newEncounter) => {
         setEncounters([...encounters, newEncounter]);
         setShowEncounterForm(false);
@@ -35,8 +35,8 @@ export const EncounterList = () => {
       });
   };
 
-  const handleEditEncounter = (id, animal, description, latitude, longitude) => {
-    editEncounter(userID, id, animal, description, latitude, longitude)
+  const handleEditEncounter = (id, animal, description, latitude, longitude, emoji) => {
+    editEncounter(userID, id, animal, description, latitude, longitude, emoji)
       .then((updatedEncounter) => {
         setEncounters(
           encounters.map((enc) => (enc.id === id ? updatedEncounter : enc))
@@ -59,11 +59,11 @@ export const EncounterList = () => {
       });
   };
 
-  const handleFormSubmit = (animal, description, latitude, longitude, encounterID) => {
+  const handleFormSubmit = (animal, description, latitude, longitude, emoji, encounterID) => {
     if (encounterID) {
-      handleEditEncounter(encounterID, animal, description, latitude, longitude);
+      handleEditEncounter(encounterID, animal, description, latitude, longitude, emoji);
     } else {
-      handleAddEncounter(animal, description, latitude, longitude);
+      handleAddEncounter(animal, description, latitude, longitude, emoji);
     }
   };
 
@@ -88,6 +88,7 @@ export const EncounterList = () => {
                 initialDescription={editingEncounter?.description || ""}
                 initialLatitude={editingEncounter?.latitude || ""}
                 initialLongitude={editingEncounter?.longitude || ""}
+                initialEmoji={editingEncounter?.emoji || ""}
                 encounterID={editingEncounter?.id || null}
               />
             </div>
@@ -100,6 +101,7 @@ export const EncounterList = () => {
                   <th scope="col">Description</th>
                   <th scope="col">Latitude</th>
                   <th scope="col">Longitude</th>
+                  <th scope="col">Animal Emoji</th>
                   <th scope="col">Actions</th>
                 </tr>
               </thead>
@@ -110,6 +112,7 @@ export const EncounterList = () => {
                     <td>{encounter.description}</td>
                     <td>{encounter.latitude}</td>
                     <td>{encounter.longitude}</td>
+                    <td>{encounter.emoji}</td>
                     <td>
                       <button onClick={() => {setEditingEncounter(encounter); setShowEncounterForm(true);}} className="btn btn-warning btn-sm me-2">Edit</button>
                       <button onClick={() => handleDeleteEncounter(encounter.id)} className="btn btn-danger btn-sm">Delete</button>

@@ -17,6 +17,8 @@ public class Encounter {
 
     private Double longitude;
 
+    private String emoji;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     @JoinColumn(name = "user_id", nullable = false)
@@ -65,6 +67,14 @@ public class Encounter {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getEmoji() {
+        return emoji;
+    }
+
+    public void setEmoji(String emoji) {
+        this.emoji = emoji;
     }
 
     public UserInfo getUserInfo() {

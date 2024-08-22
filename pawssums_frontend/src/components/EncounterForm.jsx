@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { emojiOptions } from "../components//EmojiList";
 
 export const EncounterForm = ({
   onSubmit,
@@ -6,27 +7,31 @@ export const EncounterForm = ({
   initialDescription = "",
   initialLatitude = "",
   initialLongitude = "",
+  initialEmoji = "",
   encounterID = null
 }) => {
   const [animal, setAnimal] = useState("");
   const [description, setDescription] = useState("");
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
+  const [emoji, setEmoji] = useState("");
 
   useEffect(() => {
     setAnimal(initialAnimal);
     setDescription(initialDescription);
     setLatitude(initialLatitude);
     setLongitude(initialLongitude);
-  }, [initialAnimal, initialDescription, initialLatitude, initialLongitude]);
+    setEmoji(initialEmoji);
+  }, [initialAnimal, initialDescription, initialLatitude, initialLongitude, initialEmoji]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(animal, description, latitude, longitude, encounterID);
+    onSubmit(animal, description, latitude, longitude, emoji, encounterID);
     setAnimal("");
     setDescription("");
     setLatitude("");
     setLongitude("");
+    setEmoji("");
   };
 
   return (
@@ -69,6 +74,21 @@ export const EncounterForm = ({
             onChange={(e) => setLongitude(e.target.value)}
           />
         </div>
+         <div className="mb-3">
+           <label className="form-label">Emoji:</label>
+           <select
+             className="form-control"
+             value={emoji}
+             onChange={(e) => setEmoji(e.target.value)}
+              >
+               <option value="">Select an emoji</option>
+                {emojiOptions.map((option) => (
+              <option key={option.label} value={option.emoji}>
+               {option.emoji} {option.label}
+                  </option>
+                ))}
+                </select>
+         </div>
         <button className="btn btn-success border w-100" type="submit">
           {encounterID ? "Update Encounter" : "Add Encounter"}
         </button>
