@@ -22,7 +22,7 @@ export const EncounterForm = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(animal, description, latitude, longitude);
+    onSubmit(animal, description, latitude, longitude, encounterID);
     setAnimal("");
     setDescription("");
     setLatitude("");
@@ -70,7 +70,7 @@ export const EncounterForm = ({
           />
         </div>
         <button className="btn btn-success border w-100" type="submit">
-          {initialAnimal ? "Update Encounter" : "Add Encounter"}
+          {encounterID ? "Update Encounter" : "Add Encounter"}
         </button>
       </form>
     </div>
