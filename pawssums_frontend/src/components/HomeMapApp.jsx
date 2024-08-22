@@ -17,17 +17,28 @@ import {
 
 // Custom component to render list with Advanced Markers
 const EncounterMarkers = (props) => {
-//     console.log("EncounterMarkers props:", props.encounters);
+  const [selectedEncounter, setSelectedEncounter] = useState(null);
+
   return (
     <>
       {props.encounters.map((encounter) => (
         <AdvancedMarker
           key={encounter.id}
           position={{ lat: encounter.latitude, lng: encounter.longitude }}
+          onClick={() => setSelectedEncounter(encounter)}
         >
-          <Pin background={'#FBBC04'} glyphColor={'#000'} borderColor={'#000'} />
+          <Pin background={'#8CAF96'} glyphColor={'#A55536'} borderColor={'#A55536'} />
         </AdvancedMarker>
       ))}
+      {selectedEncounter && (
+        <InfoWindow
+          position={{ lat: selectedEncounter.latitude, lng: selectedEncounter.longitude }}
+          onCloseClick={() => setSelectedEncounter(null)}
+        >
+          <div>{selectedEncounter.animal} {selectedEncounter.emoji}</div>
+{/*           <div>User ID: {selectedEncounter.userID}</div> */}
+        </InfoWindow>
+      )}
     </>
   );
 };
