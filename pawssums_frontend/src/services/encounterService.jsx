@@ -3,6 +3,16 @@ import { getToken } from './UserService';
 
 const BASEAPIURL = "http://localhost:8080/api/encounters";
 
+export const fetchAllEncounters = async () => {
+  try {
+      const response = await axios.get("http://localhost:8080/api/encounters/all", {
+        });
+    return response.data;
+  } catch (error) {
+    console.error("Error: not able to fetch encounters", error);
+    throw error;
+  }
+};
 
 export const fetchEncounters = async () => {
   try {

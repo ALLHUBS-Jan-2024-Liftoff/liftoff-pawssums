@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import {Navbar} from '../Navbar'
-import {MapApp} from '../MapApp';
+import {HomeMapApp} from '../HomeMapApp';
 import {APIProvider, Map, AdvancedMarker, Pin, InfoWindow} from "@vis.gl/react-google-maps";
 
 export const Home = () => {
@@ -15,7 +15,7 @@ export const Home = () => {
           </div>
           <div className="bg-light p-3 border rounded m-5 p-5">
             <h1 className="text-center border">MAP</h1>
-            <MapApp/>
+            <HomeMapApp/>
           </div>
         </div>
     </>
