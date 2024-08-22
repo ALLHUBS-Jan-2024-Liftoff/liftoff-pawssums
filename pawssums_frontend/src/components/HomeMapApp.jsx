@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
-  fetchEncounters,
+  fetchAllEncounters,
   addNewEncounter,
   editEncounter,
   deleteEncounter
@@ -32,14 +32,14 @@ const EncounterMarkers = (props) => {
   );
 };
 
-export const MapApp = () => {
+export const HomeMapApp = () => {
 
   const positionSTL = { lat: 38.62, lng: -90.19 };
   const [encounters, setEncounters] = useState([]);
   console.log("encounterMarkers props:", encounters);
 
   useEffect(() => {
-    fetchEncounters()
+    fetchAllEncounters()
       .then(data => {
         console.log('Fetched encounters:', data); // Log the fetched data
         setEncounters(data);
@@ -49,7 +49,7 @@ export const MapApp = () => {
 
   return (
     <APIProvider apiKey="AIzaSyBB-kFmMyRJ7xPlGzMxPHfYVvtzSTUDDsg">
-      <div style={{ height: "100%", width: "100%" }}>
+      <div style={{ height: "80vh", width: "90vw" }}>
         <Map
           defaultZoom={9}
           defaultCenter={positionSTL}
