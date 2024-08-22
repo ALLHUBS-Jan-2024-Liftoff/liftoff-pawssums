@@ -29,11 +29,11 @@ export const fetchEncounters = async () => {
   }
 };
 
-export const addNewEncounter = async (userID, animal, description, latitude, longitude) => {
+export const addNewEncounter = async (userID, animal, description, latitude, longitude, emoji) => {
   try {
     const token = getToken();
     const response = await axios.post(`${BASEAPIURL}/add`, null, {
-      params: { userID, animal, description, latitude, longitude },
+      params: { userID, animal, description, latitude, longitude, emoji },
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -60,11 +60,11 @@ export const deleteEncounter = async (userID, encounterId) => {
   }
 };
 
-export const editEncounter = async (userID, id, animal, description, latitude, longitude) => {
+export const editEncounter = async (userID, id, animal, description, latitude, longitude, emoji) => {
   try {
     const token = getToken();
     const response = await axios.put(`${BASEAPIURL}/edit/${id}`, null, {
-      params: { userID, animal, description, latitude, longitude },
+      params: { userID, animal, description, latitude, longitude, emoji },
       headers: {
         Authorization: `Bearer ${token}`
       }

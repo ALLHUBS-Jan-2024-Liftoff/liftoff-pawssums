@@ -52,7 +52,8 @@ public class EncounterController {
 
     @PostMapping("/add")
     public Encounter addNewEncounter(@RequestParam String animal, @RequestParam String description,
-                                     @RequestParam Double latitude, @RequestParam Double longitude, HttpServletRequest request) {
+                                     @RequestParam Double latitude, @RequestParam Double longitude,
+                                     @RequestParam String emoji, HttpServletRequest request) {
 
         String authorizationHeader = request.getHeader("Authorization");
         if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
@@ -70,6 +71,7 @@ public class EncounterController {
         newEncounter.setDescription(description);
         newEncounter.setLatitude(latitude);
         newEncounter.setLongitude(longitude);
+        newEncounter.setEmoji((emoji));
 
         newEncounter.setUserInfo(user);
 
@@ -111,7 +113,8 @@ public class EncounterController {
             @RequestParam String animal,
             @RequestParam String description,
             @RequestParam double latitude,
-            @RequestParam double longitude) {
+            @RequestParam double longitude,
+            @RequestParam String emoji) {
 
         return encounterRepository.findById(id)
                 .map(encounter -> {
@@ -119,6 +122,7 @@ public class EncounterController {
                     encounter.setDescription(description);
                     encounter.setLatitude(latitude);
                     encounter.setLongitude(longitude);
+                    encounter.setEmoji(emoji);
                     return ResponseEntity.ok(encounterRepository.save(encounter));
                 })
                 .orElseGet(() -> ResponseEntity.notFound().build());
