@@ -16,18 +16,19 @@ export const LoginForm = () => {
     };
 
 
-    const handleSubmit = async (event) => {
+const handleSubmit = async (event) => {
         event.preventDefault();
         try {
+            localStorage.removeItem('token');
             const response = await loginUser(values.email, values.password);
             console.log('Login successful:', response);
             localStorage.setItem('token', response.token);
-            navigate('/profile');
+            setValues({ email: '', password: '' });
+            navigate('/profile', { replace: true });
         } catch (error) {
             console.error('Login failed:', error);
             setError('Login failed. Please check your email and password.');
         }
-
     };
 
     return(

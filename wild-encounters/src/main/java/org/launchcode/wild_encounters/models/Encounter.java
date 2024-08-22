@@ -1,15 +1,14 @@
 package org.launchcode.wild_encounters.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 import java.util.LongSummaryStatistics;
 
 @Entity
 public class Encounter {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String animal;
     private String description;
@@ -17,6 +16,11 @@ public class Encounter {
     private Double latitude;
 
     private Double longitude;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserInfo userInfo;
 
 
     public Encounter(){
@@ -61,5 +65,13 @@ public class Encounter {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
     }
 }
