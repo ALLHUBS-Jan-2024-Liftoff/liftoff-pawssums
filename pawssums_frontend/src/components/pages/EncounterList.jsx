@@ -24,16 +24,10 @@ export const EncounterList = () => {
       });
   }, []);
 
-  useEffect(() => {
-    console.log("Encounters have been updated:", encounters);
-  }, [encounters]);
-  
   const handleAddEncounter = (animal, description, latitude, longitude) => {
     addNewEncounter(userID, animal, description, latitude, longitude)
       .then((newEncounter) => {
-        console.log("New Encounter:", newEncounter);
-        // setEncounters([...encounters, newEncounter]);
-        setEncounters(prevEncounters => [...prevEncounters, newEncounter]);
+        setEncounters([...encounters, newEncounter]);
         setShowEncounterForm(false);
       })
       .catch((error) => {
@@ -65,6 +59,14 @@ export const EncounterList = () => {
       });
   };
 
+  const handleFormSubmit = (animal, description, latitude, longitude) => {
+    if (editingEncounter) {
+      handleEditEncounter(editingEncounter.id, animal, description, latitude, longitude);
+    } else {
+      handleAddEncounter(animal, description, latitude, longitude);
+    }
+  };
+
   return (
     <div>
       <Navbar />
@@ -81,8 +83,7 @@ export const EncounterList = () => {
             <div className="bg-white p-3 border rounded mb-3 w-75">
               <h2 className="text-center mb-4">{editingEncounter ? "Edit Encounter" : "Add Encounter"}</h2>
               <EncounterForm
-                onSubmit={editingEncounter ? (animal, description, latitude, longitude) =>
-                  handleEditEncounter(editingEncounter.id, animal, description, latitude, longitude) : handleAddEncounter}
+                onSubmit={handleFormSubmit}
                 initialAnimal={editingEncounter?.animal || ""}
                 initialDescription={editingEncounter?.description || ""}
                 initialLatitude={editingEncounter?.latitude || ""}
@@ -124,27 +125,3 @@ export const EncounterList = () => {
     </div>
   );
 };
-
-//   return (
-//     <div>
-//       <Navbar/>
-//       <h1>Encounter List</h1>
-//       <table className="table table-hover">
-//         <thead>
-//           <tr>
-//             <th scope="col">Animal</th>
-//             <th scope="col">Description</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {encounters.map((encounter, index) => (
-//             <tr key={encounter.id}>
-//               <td>{encounter.animal}</td>
-//               <td>{encounter.description}</td>
-//             </tr>
-//           ))}
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-// };
