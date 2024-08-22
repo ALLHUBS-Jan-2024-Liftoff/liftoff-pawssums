@@ -1,7 +1,32 @@
 export const emojiOptions = [
-  { label: "Dog", emoji: "\uD83D\uDC36" },  // 🐶
-  { label: "Cat", emoji: "\uD83D\uDC31" },  // 🐱
-  { label: "Lion", emoji: "\uD83E\uDD81" }, // 🦁
-  { label: "Pig", emoji: "\uD83D\uDC37" },  // 🐷
-  { label: "Frog", emoji: "\uD83D\uDC38" },  // 🐸
+  { label: "Dog", emoji: "🐶" },
+  { label: "Cat", emoji: "🐱" },
+  { label: "Lion", emoji: "🦁" },
+  { label: "Pig", emoji: "🐷" },
+  { label: "Frog", emoji: "🐸" },
+  { label: "Monkey", emoji: "🐵" },
+  { label: "Rabbit", emoji: "🐰" },
+  { label: "Elephant", emoji: "🐘" },
+  { label: "Koala", emoji: "🐨" },
+  { label: "Tiger", emoji: "🐯" },
+  { label: "Bear", emoji: "🐻" },
+  { label: "Panda", emoji: "🐼" },
+  { label: "Penguin", emoji: "🐧" },
+  { label: "Chicken", emoji: "🐔" },
+  { label: "Cow", emoji: "🐮" },
+  { label: "Whale", emoji: "🐋" },
+  { label: "Dolphin", emoji: "🐬" },
+  { label: "Horse", emoji: "🐴" },
+  { label: "Sheep", emoji: "🐑" },
+  { label: "Fish", emoji: "🐟" },
+  { label: "Octopus", emoji: "🐙" },
+  { label: "Shark", emoji: "🦈" },
+  { label: "Eagle", emoji: "🦅" },
+  { label: "Bat", emoji: "🦇" },
+  { label: "Butterfly", emoji: "🦋" },
+  { label: "Snail", emoji: "🐌" },
+  { label: "Crab", emoji: "🦀" },
+  { label: "Crocodile", emoji: "🐊" },
+  { label: "Lizard", emoji: "🦎" },
+  { label: "Bird", emoji: "🐦" },
 ];
